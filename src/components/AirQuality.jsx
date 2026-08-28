@@ -1,18 +1,54 @@
 import { FiActivity } from "react-icons/fi";
+import { getAqiCategory, formatPollutant } from "../utils/airQuality";
 
-function AirQuality() {
+function AirQuality({ data, loading, error }) {
+  if (loading) {
+    return (
+      <section className="glass min-h-[460px] rounded-[2rem] p-6">
+        <Header />
+
+        <div className="mt-12 flex items-center justify-center">
+          <div className="flex items-center gap-3 text-sm text-muted-foreground">
+            <span className="h-5 w-5 animate-spin rounded-full border-2 border-primary/20 border-t-primary" />
+            Loading air-quality data...
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (error) {
+    return (
+      <section className="glass min-h-[460px] rounded-[2rem] p-6">
+        <Header />
+
+        <div className="mt-10 rounded-2xl bg-destructive/10 p-4 text-sm text-destructive">
+          {error}
+        </div>
+      </section>
+    );
+  }
+
+  if (!data) {
+    return null;
+  }
+
+  const aqi = Number(data.main.aqi);
+  const category = getAqiCategory(aqi);
+
   const pollutants = [
-    ["PM2.5", "28.7 μg/m³"],
-    ["PM10", "39.8 μg/m³"],
-    ["O₃", "76.3 μg/m³"],
-    ["NO₂", "29.5 μg/m³"],
-    ["SO₂", "3.8 μg/m³"],
-    ["CO", "0.88 mg/m³"],
+    ["PM2.5", data.components.pm2_5],
+    ["PM10", data.components.pm10],
+    ["O₃", data.components.o3],
+    ["NO₂", data.components.no2],
+    ["SO₂", data.components.so2],
+    ["CO", data.components.co],
   ];
 
   return (
     <section className="glass min-h-[460px] rounded-[2rem] p-6">
-      <div className="flex items-center justify-between">
+      {/* Header */}
+      {/* <div className="flex items-center justify-between gap-3">
         <div className="flex items-center gap-2.5 text-muted-foreground">
           <span className="grid h-9 w-9 place-items-center rounded-full bg-primary/10 text-primary">
             <FiActivity />
@@ -21,54 +57,84 @@ function AirQuality() {
           <span>Air quality</span>
         </div>
 
-        <span className="rounded-full bg-success/15 px-3 py-1 text-xs text-success">
-          Moderate
+        <span className="rounded-full bg-primary/10 px-3 py-1 text-xs text-primary">
+          {category.label}
         </span>
-      </div>
+      </div> */}
+      <Header />
 
+      {/* AQI */}
       <div className="mt-7 flex items-baseline gap-2">
-        <strong className="text-5xl font-medium text-foreground">
-          56
-        </strong>
+        <strong className="text-5xl font-medium text-foreground">{aqi}</strong>
 
-        <span className="text-xs text-muted-foreground">
-          US AQI
-        </span>
+        <span className="text-xs text-muted-foreground">OpenWeather AQI</span>
       </div>
 
-      <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-muted">
-        <div className="h-full w-[18%] rounded-full bg-warning" />
+      {/* AQI progress */}
+      <div className="mt-4 h-2 overflow-hidden rounded-full bg-muted">
+        <div
+          className="h-full rounded-full bg-primary transition-all duration-500"
+          style={{
+            width: `${category.progress}%`,
+          }}
+        />
       </div>
 
-      <div className="mt-2 flex justify-between text-[11px] text-muted-foreground">
+      {/* AQI scale */}
+      <div className="mt-2 flex justify-between text-[10px] text-muted-foreground">
         <span>Good</span>
+        <span>Fair</span>
         <span>Moderate</span>
-        <span>Unhealthy</span>
-        <span>Hazardous</span>
+        <span>Poor</span>
+        <span>Very poor</span>
       </div>
 
-      <div className="mt-5 grid grid-cols-2 gap-2 sm:grid-cols-3">
+      {/* Pollutants */}
+      <div className="mt-6 grid grid-cols-2 gap-2 sm:grid-cols-3">
         {pollutants.map(([name, value]) => (
-          <div
-            key={name}
-            className="rounded-2xl bg-secondary p-2.5"
-          >
+          <div key={name} className="rounded-2xl bg-secondary p-3">
             <span className="block text-[11px] text-muted-foreground">
               {name}
             </span>
 
             <strong className="mt-1 block text-[13px] font-medium text-foreground">
-              {value}
+              {formatPollutant(value)}
             </strong>
           </div>
         ))}
       </div>
 
-      <p className="mt-20 text-xs leading-relaxed text-muted-foreground">
-        Acceptable for most people. Unusually sensitive
-        individuals may want to limit long outdoor exertion.
+      {/* Description */}
+      <p className="mt-8 text-xs leading-relaxed text-muted-foreground">
+        {category.description}
+      </p>
+
+      {/* Location */}
+      <p className="mt-3 text-xs text-muted-foreground">
+        Data for{" "}
+        <span className="font-medium text-foreground">
+          {data.location.name}
+        </span>
       </p>
     </section>
+  );
+}
+
+function Header() {
+  return (
+    <div className="flex items-center justify-between gap-3">
+      <div className="flex items-center gap-2.5 text-muted-foreground">
+        <span className="grid h-9 w-9 place-items-center rounded-full bg-primary/10 text-primary">
+          <FiActivity />
+        </span>
+
+        <span>Air quality</span>
+      </div>
+
+      <span className="rounded-full bg-primary/10 px-3 py-1 text-xs text-primary">
+        Live
+      </span>
+    </div>
   );
 }
 

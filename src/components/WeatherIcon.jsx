@@ -11,34 +11,34 @@ import { IoThunderstormOutline } from "react-icons/io5";
 // import { FaWind } from "react-icons/fa";
 import { LuCloudFog } from "react-icons/lu";
 
-function WeatherIcon({ type = "sunny", size = 48 }) {
+function WeatherIcon({ type = "Clear", size = 48 }) {
   const icons = {
-    sunny: <FiSun size={size} />,
-    cloudy: <FiCloud size={size} />,
-    rain: <FiCloudRain size={size} />,
-    drizzle: <FiCloudDrizzle size={size} />,
+    Clear: <FiSun size={size} />,
+    Clouds: <FiCloud size={size} />,
+    Rain: <FiCloudRain size={size} />,
+    Drizzle: <FiCloudDrizzle size={size} />,
     moon: <FiMoon size={size} />,
-    thunder: <IoThunderstormOutline size={size} />,
+    Thunderstorm: <IoThunderstormOutline size={size} />,
     wind: <FiWind size={size} />,
-    snow: <IoIosSnow size={size} />,
-    fog: <LuCloudFog size={size} />,
+    Snow: <IoIosSnow size={size} />,
+    Fog: <LuCloudFog size={size} />,
   };
 
   const colors = {
-    sunny: "text-accent",
-    cloudy: "text-muted-foreground",
-    rain: "text-muted-foreground",
-    drizzle: "text-muted-foreground",
+    Clear: "text-accent",
+    Clouds: "text-muted-foreground",
+    Rain: "text-muted-foreground",
+    Drizzle: "text-muted-foreground",
     moon: "text-primary",
-    thunder: "text-muted-foreground",
-    snow: "primary-foreground",
+    Thunderstorm: "text-muted-foreground",
+    Snow: "primary-foreground",
     wind: "primary-foreground",
-    fog: "primary-foreground",
+    Fog: "primary-foreground",
   };
 
   return (
-    <div className={colors[type] || colors.sunny}>
-      {icons[type] || icons.sunny}
+    <div className={colors[type] || colors.Clear}>
+      {icons[type] || icons.Clear}
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import { FiSunrise, FiSunset } from "react-icons/fi";
+import { formatTime } from "../utils/weatherutils.js";
 
-function SunriseSunset() {
+function SunriseSunset({weather}) {
   return (
     <section className="glass min-h-[460px] rounded-[2rem] p-6">
       <h2 className="text-[17px] font-medium text-foreground">
@@ -23,7 +24,7 @@ function SunriseSunset() {
           </span>
 
           <strong className="mt-1 block text-xl font-medium text-foreground">
-            05:05
+            {formatTime(weather.sys.sunrise)}
           </strong>
         </div>
 
@@ -34,7 +35,7 @@ function SunriseSunset() {
           </span>
 
           <strong className="mt-1 block text-xl font-medium text-foreground">
-            18:54
+            {formatTime(weather.sys.sunset)}
           </strong>
         </div>
       </div>

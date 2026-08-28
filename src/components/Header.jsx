@@ -23,7 +23,7 @@ function Header() {
   return (
     <>
       {/* Desktop Header */}
-      <header className="sticky top-0 z-40 px-3 pt-3 sm:px-6 sm:pt-5">
+      <header className="sticky top-0 z-40 lg:mx-15 px-3 pt-3 sm:px-6 sm:pt-5">
         <nav
           aria-label="Main"
           className="glass mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-3 rounded-full px-4 py-2.5 sm:px-5"

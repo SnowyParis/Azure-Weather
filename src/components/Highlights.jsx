@@ -9,8 +9,8 @@ import {
   FiThermometer,
   FiUmbrella,
 } from "react-icons/fi";
-
 import HighlightCard from "./HighlightCard.jsx";
+import { getWindDirection } from "../utils/weatherutils.js";
 
 const icons = [
   FiDroplet,
@@ -25,7 +25,84 @@ const icons = [
   FiUmbrella,
 ];
 
-function Highlights() {
+function Highlights({ weather, airQuality, loading }) {
+  const aqi = airQuality ? Number(airQuality.main.aqi) : null;
+
+  const aqiCategory = aqi ? getAqiCategory(aqi) : null;
+
+  const WeatherStats = [
+    {
+      icon: <FiDroplet />,
+      iconColor: "bg-primary/10 text-primary",
+      title: "Humidity",
+      value: `${weather.main.humidity}%`,
+      description: "",
+    },
+    {
+      icon: <FiWind />,
+      iconColor: "bg-secondary text-muted-foreground",
+      title: "Wind speed",
+      value: `${weather.wind.speed.toFixed(1)} km/h`,
+      description: `${weather.wind.gust ? "Gusts " + weather.wind.gust.toFixed(1) + " km/h" : ""}`,
+    },
+    {
+      icon: <FiCompass />,
+      iconColor: "bg-primary/10 text-primary",
+      title: "Wind direction",
+      value: `${getWindDirection(weather.wind.deg)}`,
+      description: `${weather.wind.deg}° meteorological`,
+    },
+    {
+      icon: <FiActivity />,
+      iconColor: "bg-success/10 text-success",
+      title: "Pressure",
+      value: `${weather.main.pressure} hPa`,
+      description: "",
+    },
+    {
+      icon: <FiEye />,
+      iconColor: "bg-primary/10 text-primary",
+      title: "Visibility",
+      value: `${(weather.visibility / 1000).toFixed(1)} km`,
+      description: "",
+    },
+    {
+      icon: <FiSun />,
+      iconColor: "bg-destructive/10 text-destructive",
+      title: "UV index",
+      value: `${weather.main.uvi}`,
+      description: "",
+    },
+    {
+      icon: <FiCloud />,
+      iconColor: "bg-primary/10 text-primary",
+      title: "Cloud cover",
+      value: `${weather.clouds}%`,
+      description: "",
+    },
+    {
+      icon: <FiActivity />,
+      iconColor: "bg-secondary text-muted-foreground",
+      title: "Air quality",
+      value: `${loading ? "..." : aqi ? `${aqi} AQI` : "—"}`,
+      description: `${aqiCategory?.label ?? "Loading..."}`,
+    },
+    {
+      icon: <FiThermometer />,
+      iconColor: "bg-secondary text-muted-foreground",
+      title: "Dew point",
+      value: `${weather.dew_point} °C`,
+      description: "",
+    },
+    {
+      icon: <FiUmbrella />,
+      iconColor: "bg-primary/10 text-primary",
+      title: "Rain probability",
+      value: `${Math.round(weather.rain * 100)}%`,
+      description: "",
+    },
+  ];
+
   return (
     <section>
       <div className="mb-4">
@@ -39,97 +116,17 @@ function Highlights() {
       </div>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
-        <HighlightCard
-          icon={<FiDroplet />}
-          iconColor="bg-primary/10 text-primary"
-          title="Humidity"
-          value="65%"
-          progress={65}
-          description="Humid"
-        />
-
-        <HighlightCard
-          icon={<FiWind />}
-          iconColor="bg-secondary text-muted-foreground"
-          title="Wind speed"
-          value="14.4 km/h"
-          progress={48}
-          description="Gusts 22.4 km/h"
-        />
-
-        <HighlightCard
-          icon={<FiCompass />}
-          iconColor="bg-primary/10 text-primary"
-          title="Wind direction"
-          value="SE"
-          description="130° meteorological"
-        >
-          <div className="relative mt-1 h-[52px] w-[52px] rounded-full border border-border">
-            <span className="absolute left-1/2 top-1/2 h-0.5 w-6 origin-left -translate-y-1/2 rotate-45 bg-primary" />
-          </div>
-        </HighlightCard>
-
-        <HighlightCard
-          icon={<FiActivity />}
-          iconColor="bg-success/10 text-success"
-          title="Pressure"
-          value="1012 hPa"
-          progress={58}
-          description="Normal"
-        />
-
-        <HighlightCard
-          icon={<FiEye />}
-          iconColor="bg-primary/10 text-primary"
-          title="Visibility"
-          value="14.2 km"
-          progress={76}
-          description="Excellent"
-        />
-
-        <HighlightCard
-          icon={<FiSun />}
-          iconColor="bg-destructive/10 text-destructive"
-          title="UV index"
-          value="8"
-          progress={80}
-          description="Very high"
-        />
-
-        <HighlightCard
-          icon={<FiCloud />}
-          iconColor="bg-primary/10 text-primary"
-          title="Cloud cover"
-          value="9%"
-          progress={9}
-          description="Mostly clear"
-        />
-
-        <HighlightCard
-          icon={<FiActivity />}
-          iconColor="bg-secondary text-muted-foreground"
-          title="Air quality"
-          value="56 AQI"
-          progress={20}
-          description="Moderate"
-        />
-
-        <HighlightCard
-          icon={<FiThermometer />}
-          iconColor="bg-secondary text-muted-foreground"
-          title="Dew point"
-          value="6°C"
-          description="Comfortable air"
-        />
-
-        <HighlightCard
-          icon={<FiUmbrella />}
-          iconColor="bg-primary/10 text-primary"
-          title="Rain probability"
-          value="1%"
-          progress={1}
-          description="0 mm expected"
-        />
+        {WeatherStats.map(({ icon, iconColor, title, value, description }) => (
+          <HighlightCard
+            key={title}
+            icon={icon}
+            iconColor={iconColor}
+            title={title}
+            value={value}
+            progress={weather.main.humidity}
+            description={description}
+          />
+        ))}
       </div>
     </section>
   );

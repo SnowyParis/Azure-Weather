@@ -5,24 +5,33 @@ import Settings from "./pages/Settings.jsx";
 import Details from "./pages/Details.jsx";
 import Search from "./pages/Search.jsx";
 import Home from "./pages/Home.jsx";
-// import { getCurrentWeather, getWeatherForecast } from "./services/weatherAPI.js";
 import { useWeather } from "./hooks/useWeather.js";
-import "./App.css";
+import {
+  getCurrentWeather,
+  getWeatherForecast,
+  getCityAirQuality,
+} from "./services/weatherAPI.js";
+// import "./App.css";
 
 function App() {
-    // console.log(getCurrentWeather("Cape Town"));
-    // console.log(getWeatherForecast("Cape Town"));
+  console.log(getCurrentWeather("Cape Town"));
+  console.log(getCityAirQuality("Cape Town"));
+  // console.log(getWeatherForecast("Cape Town"));
 
-    const {currentWeather, forecast, loading, error, fetchWeatherByCity} = useWeather();
-
+  const { currentWeather, forecast, loading, error, fetchWeatherByCity } =
+    useWeather();
+  // if (currentWeather)
+  //   {console.log(getAQI(currentWeather.coord.lat, currentWeather.coord.lon));}
   return (
     <div className="min-h-screen pb-20">
       <Header />
       <main className="mx-auto w-[calc(100%-24px)] max-w-5xl">
-        
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/search" element={<Search onSearch={fetchWeatherByCity} loading={loading} />} />
+          <Route
+            path="/search"
+            element={<Search onSearch={fetchWeatherByCity} loading={loading} />}
+          />
           <Route path="/details" element={<Details />} />
           <Route path="/settings" element={<Settings />} />
         </Routes>
