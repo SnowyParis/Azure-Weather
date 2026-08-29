@@ -47,27 +47,13 @@ function AirQuality({ data, loading, error }) {
 
   return (
     <section className="glass min-h-[460px] rounded-[2rem] p-6">
-      {/* Header */}
-      {/* <div className="flex items-center justify-between gap-3">
-        <div className="flex items-center gap-2.5 text-muted-foreground">
-          <span className="grid h-9 w-9 place-items-center rounded-full bg-primary/10 text-primary">
-            <FiActivity />
-          </span>
-
-          <span>Air quality</span>
-        </div>
-
-        <span className="rounded-full bg-primary/10 px-3 py-1 text-xs text-primary">
-          {category.label}
-        </span>
-      </div> */}
       <Header />
 
       {/* AQI */}
       <div className="mt-7 flex items-baseline gap-2">
         <strong className="text-5xl font-medium text-foreground">{aqi}</strong>
 
-        <span className="text-xs text-muted-foreground">OpenWeather AQI</span>
+        <span className="text-sm text-muted-foreground">OpenWeather AQI</span>
       </div>
 
       {/* AQI progress */}
@@ -81,7 +67,7 @@ function AirQuality({ data, loading, error }) {
       </div>
 
       {/* AQI scale */}
-      <div className="mt-2 flex justify-between text-[10px] text-muted-foreground">
+      <div className="mt-2 flex justify-between font-medium text-[13px] text-muted-foreground">
         <span>Good</span>
         <span>Fair</span>
         <span>Moderate</span>
@@ -92,12 +78,12 @@ function AirQuality({ data, loading, error }) {
       {/* Pollutants */}
       <div className="mt-6 grid grid-cols-2 gap-2 sm:grid-cols-3">
         {pollutants.map(([name, value]) => (
-          <div key={name} className="rounded-2xl bg-secondary p-3">
-            <span className="block text-[11px] text-muted-foreground">
+          <div key={name} className="rounded-2xl bg-foreground/7 px-3 py-2">
+            <span className="block text-[0.68rem] text-muted-foreground">
               {name}
             </span>
 
-            <strong className="mt-1 block text-[13px] font-medium text-foreground">
+            <strong className="mt-1 block text-sm font-semibold text-foreground">
               {formatPollutant(value)}
             </strong>
           </div>

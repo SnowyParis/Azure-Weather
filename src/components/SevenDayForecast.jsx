@@ -50,7 +50,7 @@ function SevenDayForecast({ forecast }) {
               Humidity {item.main.humidity}%
             </span>
 
-            {/* <span className="rounded-full bg-muted px-2.5 py-1 text-xs text-muted-foreground">
+            {/* <span className="rounded-full bg-muted text-xs text-muted-foreground">
               Humidity {item.main.humidity}%
             </span> */}
 

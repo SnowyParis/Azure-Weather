@@ -1,3 +1,6 @@
+import { getWindDirection } from "../utils/weatherutils.js";
+import { getAqiCategory } from "../utils/airQuality";
+import HighlightCard from "./HighlightCard.jsx";
 import {
   FiDroplet,
   FiWind,
@@ -9,8 +12,6 @@ import {
   FiThermometer,
   FiUmbrella,
 } from "react-icons/fi";
-import HighlightCard from "./HighlightCard.jsx";
-import { getWindDirection } from "../utils/weatherutils.js";
 
 const icons = [
   FiDroplet,
@@ -43,11 +44,11 @@ function Highlights({ weather, airQuality, loading }) {
       iconColor: "bg-secondary text-muted-foreground",
       title: "Wind speed",
       value: `${weather.wind.speed.toFixed(1)} km/h`,
-      description: `${weather.wind.gust ? "Gusts " + weather.wind.gust.toFixed(1) + " km/h" : ""}`,
+      description: `${weather.wind.gust ? "Gusts " + weather.wind.gust.toFixed(1) + " km/h" : "No gusts"}`,
     },
     {
       icon: <FiCompass />,
-      iconColor: "bg-primary/10 text-primary",
+      iconColor: "bg-destructive/10 text-destructive",
       title: "Wind direction",
       value: `${getWindDirection(weather.wind.deg)}`,
       description: `${weather.wind.deg}° meteorological`,
@@ -66,41 +67,41 @@ function Highlights({ weather, airQuality, loading }) {
       value: `${(weather.visibility / 1000).toFixed(1)} km`,
       description: "",
     },
-    {
-      icon: <FiSun />,
-      iconColor: "bg-destructive/10 text-destructive",
-      title: "UV index",
-      value: `${weather.main.uvi}`,
-      description: "",
-    },
-    {
-      icon: <FiCloud />,
-      iconColor: "bg-primary/10 text-primary",
-      title: "Cloud cover",
-      value: `${weather.clouds}%`,
-      description: "",
-    },
-    {
-      icon: <FiActivity />,
-      iconColor: "bg-secondary text-muted-foreground",
-      title: "Air quality",
-      value: `${loading ? "..." : aqi ? `${aqi} AQI` : "—"}`,
-      description: `${aqiCategory?.label ?? "Loading..."}`,
-    },
-    {
-      icon: <FiThermometer />,
-      iconColor: "bg-secondary text-muted-foreground",
-      title: "Dew point",
-      value: `${weather.dew_point} °C`,
-      description: "",
-    },
-    {
-      icon: <FiUmbrella />,
-      iconColor: "bg-primary/10 text-primary",
-      title: "Rain probability",
-      value: `${Math.round(weather.rain * 100)}%`,
-      description: "",
-    },
+    // {
+    //   icon: <FiSun />,
+    //   iconColor: "bg-destructive/10 text-destructive",
+    //   title: "UV index",
+    //   value: `${weather.main.uvi}`,
+    //   description: "",
+    // },
+    // {
+    //   icon: <FiCloud />,
+    //   iconColor: "bg-primary/10 text-primary",
+    //   title: "Cloud cover",
+    //   value: `${weather.clouds}%`,
+    //   description: "",
+    // },
+    // {
+    //   icon: <FiActivity />,
+    //   iconColor: "bg-secondary text-muted-foreground",
+    //   title: "Air quality",
+    //   value: `${loading ? "..." : aqi ? `${aqi} AQI` : "—"}`,
+    //   description: `${aqiCategory?.label ?? "Loading..."}`,
+    // },
+    // {
+    //   icon: <FiThermometer />,
+    //   iconColor: "bg-secondary text-muted-foreground",
+    //   title: "Dew point",
+    //   value: `${weather.dew_point} °C`,
+    //   description: "",
+    // },
+    // {
+    //   icon: <FiUmbrella />,
+    //   iconColor: "bg-primary/10 text-primary",
+    //   title: "Rain probability",
+    //   value: `${Math.round(weather.rain * 100)}%`,
+    //   description: "",
+    // },
   ];
 
   return (
@@ -123,7 +124,7 @@ function Highlights({ weather, airQuality, loading }) {
             iconColor={iconColor}
             title={title}
             value={value}
-            progress={weather.main.humidity}
+            // progress={weather.main.humidity}
             description={description}
           />
         ))}

@@ -2,10 +2,10 @@ import CurrentWeather from "../components/CurrentWeather";
 // import HourlyForecast from "../components/HourlyForecast";
 import Highlights from "../components/Highlights";
 import AirQuality from "../components/AirQuality";
-// import SunriseSunset from "../components/SunriseSunset";
 import SevenDayForecast from "../components/SevenDayForecast";
 import { useAirQuality } from "../hooks/useAirQuality";
 import { useWeather } from "../hooks/useWeather.js";
+import { useEffect } from "react";
 
 function Home() {
   const {
@@ -18,10 +18,33 @@ function Home() {
   const { currentWeather, forecast, loading, error, fetchWeatherByCity } =
     useWeather();
 
+  useEffect(() => {
+    // Create a local cancellation controller for this cycle
+    let isCurrentRequest = true;
+
+    // Create a dummy abort object to match our hook configuration
+    const signal = {
+      get aborted() {
+        return !isCurrentRequest;
+      },
+    };
+
+    fetchAirQuality("Cape Town", signal);
+
+    // Cleanup function runs if city changes or component unmounts
+    return () => {
+      isCurrentRequest = false;
+    };
+  }, ["Cape Town", fetchAirQuality]);
+
+  // if (airQualityLoading) return <p>Loading data...</p>;
+  // if (airQualityError) return <p style={{ color: "red" }}>{airQualityError}</p>;
+  // if (!airQuality) return <p>No data requested yet.</p>;
+
   return (
     <div className="flex flex-col gap-9">
-      {currentWeather && !loading && (
-        <CurrentWeather weather={currentWeather} />
+      {currentWeather && airQuality && !loading && (
+        <CurrentWeather weather={currentWeather} aqi={airQuality} />
       )}
 
       {/* <HourlyForecast /> */}
@@ -41,10 +64,6 @@ function Home() {
             error={airQualityError}
           />
         )}
-
-        {/* {currentWeather && !loading && (
-          <SunriseSunset weather={currentWeather} />
-        )} */}
       </section>
 
       {forecast && <SevenDayForecast forecast={forecast} />}

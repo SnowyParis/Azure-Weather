@@ -1,11 +1,11 @@
+import { useWeather } from "./hooks/useWeather.js";
 import { Routes, Route } from "react-router-dom";
-import { FiArrowUp } from "react-icons/fi";
 import Header from "./components/Header.jsx";
 import Settings from "./pages/Settings.jsx";
+import { FiArrowUp } from "react-icons/fi";
 import Details from "./pages/Details.jsx";
 import Search from "./pages/Search.jsx";
 import Home from "./pages/Home.jsx";
-import { useWeather } from "./hooks/useWeather.js";
 import {
   getCurrentWeather,
   getWeatherForecast,

@@ -12,7 +12,7 @@ import {
   FiSunset,
 } from "react-icons/fi";
 
-function CurrentWeather({ weather }) {
+function CurrentWeather({ weather, aqi }) {
   return (
     <section className="glass-strong relative min-h-[380px] mt-6 overflow-hidden rounded-[2.5rem] p-6 sm:p-9">
       <p className="mb-2 text-sm text-muted-foreground">
@@ -28,7 +28,7 @@ function CurrentWeather({ weather }) {
       </div>
 
       <p className="mt-1 text-sm text-muted-foreground">
-        {weather.name}, {weather.sys.country} ·{" "}
+        {aqi.location.state}, {weather.sys.country} ·{" "}
         {new Date(weather.dt * 1000).toLocaleDateString("en-US", {
           weekday: "long",
           month: "short",
@@ -88,12 +88,16 @@ function CurrentWeather({ weather }) {
               </span>
             )}
 
-            <span className="flex items-center gap-1 rounded-full bg-muted px-2.5 py-1 text-xs text-muted-foreground">
+            
+          </div>
+
+          <div className="flex items-center gap-2.5 mt-3 flex-wrap">
+            <span className="flex items-center gap-1.5 rounded-full bg-muted px-2.5 py-1 text-xs text-muted-foreground">
               <FiSunrise className="text-sm" />
               <strong>Sunrise {formatTime(weather.sys.sunrise)}</strong>
             </span>
 
-            <span className="flex items-center gap-1 rounded-full bg-muted px-2.5 py-1 text-xs text-muted-foreground">
+            <span className="flex items-center gap-1.5 rounded-full bg-muted px-2.5 py-1 text-xs text-muted-foreground">
               <FiSunset className="text-sm" />
               <strong>Sunset {formatTime(weather.sys.sunset)}</strong>
             </span>

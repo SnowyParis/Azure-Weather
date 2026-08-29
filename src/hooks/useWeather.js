@@ -1,14 +1,13 @@
+import { useState, useEffect, useCallback } from "react";
 import {
   getCurrentWeather,
   getWeatherForecast,
   searchCities,
 } from "../services/weatherAPI.js";
-import { useState, useEffect, useCallback } from "react";
 
 export const useWeather = () => {
   const [currentWeather, setCurrentWeather] = useState(null);
   const [forecast, setForecast] = useState(null);
-  // const [aqi, setAqi] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -34,25 +33,6 @@ export const useWeather = () => {
       setLoading(false);
     }
   }, []);
-
-  // const fetchAqiByLocation = async (latitude, longitude) => {
-  //     setLoading(true);
-  //     setError(null);
-
-  //     try {
-  //         const aqiData = await Promise.all([getAQI(latitude, longitude)]);
-
-  //         // setAqi(aqiData);
-  //     }
-  //     catch (error)
-  //     {
-  //         setError(error instanceof Error ? error.message : "Failed to fetch AQI data.");
-  //     }
-  //     finally
-  //     {
-  //         setLoading(false);
-  //     }
-  // };
 
   //loading default
   useEffect(() => {
