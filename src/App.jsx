@@ -14,8 +14,8 @@ import {
 // import "./App.css";
 
 function App() {
-  console.log(getCurrentWeather("Cape Town"));
-  console.log(getCityAirQuality("Cape Town"));
+  // console.log(getCurrentWeather("Cape Town"));
+  // console.log(getCityAirQuality("Cape Town"));
   // console.log(getWeatherForecast("Cape Town"));
 
   const { currentWeather, forecast, loading, error, fetchWeatherByCity } =
@@ -28,10 +28,7 @@ function App() {
       <main className="mx-auto w-[calc(100%-24px)] max-w-5xl">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route
-            path="/search"
-            element={<Search onSearch={fetchWeatherByCity} loading={loading} />}
-          />
+          {/* <Route path="/search"  element={<Search />} /> */}
           <Route path="/details" element={<Details />} />
           <Route path="/settings" element={<Settings />} />
         </Routes>

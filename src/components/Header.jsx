@@ -1,5 +1,8 @@
 import { NavLink, useLocation } from "react-router-dom";
-import { useState } from "react";
+import { useWeather } from "../hooks/useWeather.js";
+import Search from "../pages/Search.jsx";
+import { useDebounce } from "react-use";
+import { useState, useEffect } from "react";
 import {
   FiCloud,
   FiHome,
@@ -16,9 +19,41 @@ const nav = [
 ];
 
 function Header() {
-  // const { settings } = useSettings();
-  // const { data } = useWeather();
+  const { currentWeather, forecast, loading, error, fetchWeatherByCity } =
+    useWeather();
   const { pathname } = useLocation();
+  const [searchTerm, setSearchTerm] = useState("");
+  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("");
+
+  //Debounce the search term to prevent too many API requests
+  //by waiting for 500ms after the user stops typing before making the API request
+  useDebounce(
+    () => {
+      setDebouncedSearchTerm(searchTerm);
+    },
+    500,
+    [searchTerm],
+  );
+
+  useEffect(() => {
+    fetchWeatherByCity(debouncedSearchTerm);
+  }, [debouncedSearchTerm]);
+
+//   searchButton.addEventListener("click", () => {
+
+//     if (cityInput.value.trim() != '') //check that value entered in input box is not empty
+//     {
+//         checkWeather(cityInput.value); //sends city name typed into searchBox to checkWeather()
+//     }
+// })
+
+// cityInput.addEventListener('keydown', (event) => {
+
+//     if (event.key == 'Enter' && cityInput.value.trim() != '') //when the Enter key is pressed
+//     {
+//         checkWeather(cityInput.value);
+//     }
+// })
 
   return (
     <>
@@ -43,6 +78,10 @@ function Header() {
 
           {/* Desktop Navigation */}
           <div className="flex shrink-0 items-center gap-1">
+            {/* start */}
+            <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+             {/* end */}
+
             <div className="hidden items-center gap-1 md:flex">
               {nav.map(({ to, label, Icon }) => {
                 const active =
@@ -64,11 +103,6 @@ function Header() {
           </div>
         </nav>
       </header>
-
-      {/* Main Content */}
-      {/* <main className="mx-auto w-full max-w-6xl px-3 pt-6 pb-28 sm:px-6 sm:pb-16">
-        {children}
-      </main> */}
 
       {/* Mobile Floating Navigation (hidden for bigger screens)*/}
       <nav
@@ -92,8 +126,6 @@ function Header() {
           );
         })}
       </nav>
-
-      {/* <BackToTop /> */}
     </>
   );
 }
