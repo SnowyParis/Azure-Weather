@@ -2,8 +2,8 @@ import SevenDayForecast from "../components/SevenDayForecast";
 import CurrentWeather from "../components/CurrentWeather";
 import { useAirQuality } from "../hooks/useAirQuality";
 import { useWeather } from "../hooks/useWeather.js";
-import Highlights from "../components/Highlights";
 import { useSearchParams } from "react-router-dom";
+import Highlights from "../components/Highlights";
 import AirQuality from "../components/AirQuality";
 import Header from "../components/Header.jsx";
 import { useState, useEffect } from "react";
@@ -58,14 +58,14 @@ function Home() {
   }, [city, fetchAirQuality]);
 
   return (
-    <div className="flex flex-col gap-9">
+    <div>
       <Header
         onSearch={handleSearch}
         onRefresh={handleRefresh}
         currentCity={city}
       />
 
-      <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+      <main className="mx-0 px-4 py-4 sm:px-6 lg:px-8">
         {error && !currentWeather ? (
           <div className="glass rounded-[2rem] p-8 text-center">
             <h2 className="text-xl font-semibold">Unable to load weather</h2>
@@ -94,15 +94,13 @@ function Home() {
               />
             )}
 
-            <section className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-              {airQuality && !airQualityLoading && (
-                <AirQuality
-                  data={airQuality}
-                  loading={airQualityLoading}
-                  error={airQualityError}
-                />
-              )}
-            </section>
+            {airQuality && !airQualityLoading && (
+              <AirQuality
+                data={airQuality}
+                loading={airQualityLoading}
+                error={airQualityError}
+              />
+            )}
 
             {forecast && <SevenDayForecast forecast={forecast} />}
           </div>
