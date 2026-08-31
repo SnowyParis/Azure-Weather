@@ -1,3 +1,6 @@
+import { IoThunderstormOutline } from "react-icons/io5";
+import { LuCloudFog } from "react-icons/lu";
+import { IoIosSnow } from "react-icons/io";
 import {
   FiSun,
   FiCloud,
@@ -6,10 +9,6 @@ import {
   FiWind,
   FiMoon,
 } from "react-icons/fi";
-import { IoIosSnow } from "react-icons/io";
-import { IoThunderstormOutline } from "react-icons/io5";
-// import { FaWind } from "react-icons/fa";
-import { LuCloudFog } from "react-icons/lu";
 
 function WeatherIcon({ type = "Clear", size = 48 }) {
   const icons = {

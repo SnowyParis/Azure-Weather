@@ -45,8 +45,8 @@ function SevenDayForecast({ forecast }) {
             <WeatherIcon type={item.weather[0].main} size={24} />
 
             <span className="hidden first-letter:uppercase text-xs text-muted-foreground sm:block">
-              {item.weather[0].description} <strong> · </strong>
-              Wind {item.wind.speed.toFixed(1)} km/h <strong> · </strong>
+              {item.weather[0].description} <strong> • </strong>
+              Wind {item.wind.speed.toFixed(1)} km/h <strong> • </strong>
               Humidity {item.main.humidity}%
             </span>
 

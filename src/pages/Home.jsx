@@ -1,22 +1,42 @@
-import CurrentWeather from "../components/CurrentWeather";
-// import HourlyForecast from "../components/HourlyForecast";
-import Highlights from "../components/Highlights";
-import AirQuality from "../components/AirQuality";
 import SevenDayForecast from "../components/SevenDayForecast";
+import CurrentWeather from "../components/CurrentWeather";
 import { useAirQuality } from "../hooks/useAirQuality";
 import { useWeather } from "../hooks/useWeather.js";
-import { useEffect } from "react";
+import Highlights from "../components/Highlights";
+import { useSearchParams } from "react-router-dom";
+import AirQuality from "../components/AirQuality";
+import Header from "../components/Header.jsx";
+import { useState, useEffect } from "react";
 
 function Home() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const city = searchParams.get("city") || "Cape Town";
+
   const {
     data: airQuality,
     loading: airQualityLoading,
     error: airQualityError,
     fetchAirQuality,
-  } = useAirQuality("Cape Town");
+  } = useAirQuality(city);
 
   const { currentWeather, forecast, loading, error, fetchWeatherByCity } =
-    useWeather();
+    useWeather(city);
+
+  function handleSearch(newCity) {
+    const trimmedCity = newCity.trim();
+
+    if (!trimmedCity) {
+      return;
+    }
+
+    setSearchParams({
+      city: trimmedCity,
+    });
+  }
+
+  function handleRefresh() {
+    fetchWeatherByCity(city);
+  }
 
   useEffect(() => {
     // Create a local cancellation controller for this cycle
@@ -29,44 +49,65 @@ function Home() {
       },
     };
 
-    fetchAirQuality("Cape Town", signal);
+    fetchAirQuality(city, signal);
 
     // Cleanup function runs if city changes or component unmounts
     return () => {
       isCurrentRequest = false;
     };
-  }, ["Cape Town", fetchAirQuality]);
-
-  // if (airQualityLoading) return <p>Loading data...</p>;
-  // if (airQualityError) return <p style={{ color: "red" }}>{airQualityError}</p>;
-  // if (!airQuality) return <p>No data requested yet.</p>;
+  }, [city, fetchAirQuality]);
 
   return (
     <div className="flex flex-col gap-9">
-      {currentWeather && airQuality && !loading && (
-        <CurrentWeather weather={currentWeather} aqi={airQuality} />
-      )}
+      <Header
+        onSearch={handleSearch}
+        onRefresh={handleRefresh}
+        currentCity={city}
+      />
 
-      {/* <HourlyForecast /> */}
+      <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+        {error && !currentWeather ? (
+          <div className="glass rounded-[2rem] p-8 text-center">
+            <h2 className="text-xl font-semibold">Unable to load weather</h2>
 
-      {currentWeather && !loading && (
-        <Highlights
-          weather={currentWeather}
-          airQuality={airQuality}
-          loading={airQualityLoading}
-        />
-      )}
-      <section className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-        {airQuality && !airQualityLoading && (
-          <AirQuality
-            data={airQuality}
-            loading={airQualityLoading}
-            error={airQualityError}
-          />
+            <p className="mt-2 text-sm text-muted-foreground">{error}</p>
+
+            <button
+              type="button"
+              onClick={handleRefresh}
+              className="mt-6 rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition hover:opacity-90"
+            >
+              Try again
+            </button>
+          </div>
+        ) : (
+          <div className="flex flex-col gap-9">
+            {currentWeather && airQuality && !loading && (
+              <CurrentWeather weather={currentWeather} aqi={airQuality} />
+            )}
+
+            {currentWeather && !loading && (
+              <Highlights
+                weather={currentWeather}
+                airQuality={airQuality}
+                loading={airQualityLoading}
+              />
+            )}
+
+            <section className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+              {airQuality && !airQualityLoading && (
+                <AirQuality
+                  data={airQuality}
+                  loading={airQualityLoading}
+                  error={airQualityError}
+                />
+              )}
+            </section>
+
+            {forecast && <SevenDayForecast forecast={forecast} />}
+          </div>
         )}
-      </section>
-
-      {forecast && <SevenDayForecast forecast={forecast} />}
+      </main>
     </div>
   );
 }

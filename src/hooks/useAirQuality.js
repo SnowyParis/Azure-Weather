@@ -25,7 +25,7 @@ export function useAirQuality(city) {
       setError(error.message || "Unable to load air-quality data.");
     } finally {
       if (abortSignal && abortSignal.aborted) return;
-      
+
       setLoading(false);
     }
   }, []);

@@ -1,9 +1,5 @@
 import WeatherIcon from "./WeatherIcon.jsx";
-import {
-  formatTemperature,
-  formatTime,
-  formatDate,
-} from "../utils/weatherutils.js";
+import { formatTemperature, formatTime } from "../utils/weatherutils.js";
 import {
   FiMapPin,
   FiArrowUp,
@@ -28,7 +24,8 @@ function CurrentWeather({ weather, aqi }) {
       </div>
 
       <p className="mt-1 text-sm text-muted-foreground">
-        {aqi.location.state}, {weather.sys.country} ·{" "}
+        {aqi.location.state && (<span>{aqi.location.state}, </span>)}
+        {weather.sys.country} ·{" "}
         {new Date(weather.dt * 1000).toLocaleDateString("en-US", {
           weekday: "long",
           month: "short",
@@ -87,8 +84,6 @@ function CurrentWeather({ weather, aqi }) {
                 <strong>{weather.pop}% rain</strong>
               </span>
             )}
-
-            
           </div>
 
           <div className="flex items-center gap-2.5 mt-3 flex-wrap">

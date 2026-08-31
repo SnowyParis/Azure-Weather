@@ -5,13 +5,17 @@ import {
   searchCities,
 } from "../services/weatherAPI.js";
 
-export const useWeather = () => {
+export const useWeather = (city) => {
   const [currentWeather, setCurrentWeather] = useState(null);
   const [forecast, setForecast] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   const fetchWeatherByCity = useCallback(async (city) => {
+    if (!city?.trim()) {
+      return;
+    }
+
     setLoading(true);
     setError(null);
 
@@ -34,11 +38,9 @@ export const useWeather = () => {
     }
   }, []);
 
-  //loading default
   useEffect(() => {
-    fetchWeatherByCity("Cape Town");
-    // fetchAqiByLocation(-33.9258, 18.4232);
-  }, [fetchWeatherByCity]);
+    fetchWeatherByCity(city);
+  }, [city, fetchWeatherByCity]);
 
   return { currentWeather, forecast, loading, error, fetchWeatherByCity };
 };

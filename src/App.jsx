@@ -1,16 +1,16 @@
 import { useWeather } from "./hooks/useWeather.js";
 import { Routes, Route } from "react-router-dom";
-import Header from "./components/Header.jsx";
+// import Header from "./components/Header.jsx";
 import Settings from "./pages/Settings.jsx";
 import { FiArrowUp } from "react-icons/fi";
 import Details from "./pages/Details.jsx";
 import Search from "./pages/Search.jsx";
 import Home from "./pages/Home.jsx";
-import {
-  getCurrentWeather,
-  getWeatherForecast,
-  getCityAirQuality,
-} from "./services/weatherAPI.js";
+// import {
+//   getCurrentWeather,
+//   getWeatherForecast,
+//   getCityAirQuality,
+// } from "./services/weatherAPI.js";
 // import "./App.css";
 
 function App() {
@@ -18,13 +18,12 @@ function App() {
   // console.log(getCityAirQuality("Cape Town"));
   // console.log(getWeatherForecast("Cape Town"));
 
-  const { currentWeather, forecast, loading, error, fetchWeatherByCity } =
-    useWeather();
-  // if (currentWeather)
-  //   {console.log(getAQI(currentWeather.coord.lat, currentWeather.coord.lon));}
+  // const { currentWeather, forecast, loading, error, fetchWeatherByCity } =
+  //   useWeather();
+
   return (
     <div className="min-h-screen pb-20">
-      <Header />
+      {/* <Header /> */}
       <main className="mx-auto w-[calc(100%-24px)] max-w-5xl">
         <Routes>
           <Route path="/" element={<Home />} />

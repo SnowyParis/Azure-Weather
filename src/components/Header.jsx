@@ -1,133 +1,205 @@
-import { NavLink, useLocation } from "react-router-dom";
-import { useWeather } from "../hooks/useWeather.js";
-import Search from "../pages/Search.jsx";
-import { useDebounce } from "react-use";
-import { useState, useEffect } from "react";
-import {
-  FiCloud,
-  FiHome,
-  FiSearch,
-  FiSettings,
-  FiSliders,
-} from "react-icons/fi";
+import { useState } from "react";
+import { FiMapPin, FiSearch, FiRefreshCw } from "react-icons/fi";
 
-const nav = [
-  { to: "/", label: "Home", Icon: FiHome },
-  { to: "/search", label: "Search", Icon: FiSearch },
-  { to: "/details", label: "Details", Icon: FiSliders },
-  { to: "/settings", label: "Settings", Icon: FiSettings },
-];
+function Header({ onSearch, onRefresh, currentCity }) {
+  const [city, setCity] = useState(currentCity || "");
 
-function Header() {
-  const { currentWeather, forecast, loading, error, fetchWeatherByCity } =
-    useWeather();
-  const { pathname } = useLocation();
-  const [searchTerm, setSearchTerm] = useState("");
-  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("");
+  function handleSubmit(event) {
+    event.preventDefault();
 
-  //Debounce the search term to prevent too many API requests
-  //by waiting for 500ms after the user stops typing before making the API request
-  useDebounce(
-    () => {
-      setDebouncedSearchTerm(searchTerm);
-    },
-    500,
-    [searchTerm],
-  );
+    const trimmedCity = city.trim();
 
-  useEffect(() => {
-    fetchWeatherByCity(debouncedSearchTerm);
-  }, [debouncedSearchTerm]);
+    if (!trimmedCity) {
+      return;
+    }
 
-//   searchButton.addEventListener("click", () => {
-
-//     if (cityInput.value.trim() != '') //check that value entered in input box is not empty
-//     {
-//         checkWeather(cityInput.value); //sends city name typed into searchBox to checkWeather()
-//     }
-// })
-
-// cityInput.addEventListener('keydown', (event) => {
-
-//     if (event.key == 'Enter' && cityInput.value.trim() != '') //when the Enter key is pressed
-//     {
-//         checkWeather(cityInput.value);
-//     }
-// })
+    onSearch(trimmedCity);
+  }
 
   return (
-    <>
-      {/* Desktop Header */}
-      <header className="sticky top-0 z-40 lg:mx-15 px-3 pt-3 sm:px-6 sm:pt-5">
-        <nav
-          aria-label="Main"
-          className="glass mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-3 rounded-full px-4 py-2.5 sm:px-5"
-        >
-          {/* Logo */}
-          <NavLink
-            to="/"
-            className="flex min-w-0 items-center gap-2 font-display text-base font-semibold"
-          >
-            <FiCloud
-              aria-hidden="true"
-              className="size-5 shrink-0 text-primary"
+    <header className="sticky top-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-xl">
+      <div className="mx-auto flex h-20 max-w-7xl items-center gap-4 px-4 sm:px-6 lg:px-8">
+        {/* Logo */}
+        <div className="flex shrink-0 items-center gap-2">
+          <div className="grid h-10 w-10 place-items-center rounded-2xl bg-primary text-primary-foreground">
+            <FiMapPin />
+          </div>
+
+          <span className="hidden text-lg font-semibold sm:block">Weather</span>
+        </div>
+
+        {/* Search */}
+        <form onSubmit={handleSubmit} className="mx-auto flex w-full max-w-xl">
+          <div className="relative w-full">
+            <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground" />
+
+            <input
+              type="search"
+              value={city}
+              onChange={(event) => setCity(event.target.value)}
+              placeholder="Search for a city..."
+              aria-label="Search for a city"
+              className="h-11 w-full rounded-full border border-border bg-card pl-11 pr-24 text-sm outline-none transition placeholder:text-muted-foreground focus:border-primary focus:ring-2 focus:ring-primary/20"
             />
 
-            <span className="truncate">Azure Weather</span>
-          </NavLink>
-
-          {/* Desktop Navigation */}
-          <div className="flex shrink-0 items-center gap-1">
-            {/* start */}
-            <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-             {/* end */}
-
-            <div className="hidden items-center gap-1 md:flex">
-              {nav.map(({ to, label, Icon }) => {
-                const active =
-                  to === "/" ? pathname === "/" : pathname.startsWith(to);
-
-                return (
-                  <NavLink
-                    key={to}
-                    to={to}
-                    end={to === "/"}
-                    className={`flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-medium transition-colors ${active ? "bg-foreground/10 text-foreground" : "text-muted-foreground"} hover:bg-foreground/8`}
-                  >
-                    <Icon aria-hidden="true" className="size-4" />
-                    {label}
-                  </NavLink>
-                );
-              })}
-            </div>
-          </div>
-        </nav>
-      </header>
-
-      {/* Mobile Floating Navigation (hidden for bigger screens)*/}
-      <nav
-        aria-label="Mobile"
-        className="glass fixed inset-x-3 bottom-3 z-40 grid grid-cols-4 gap-1 rounded-3xl p-1.5 md:hidden"
-      >
-        {nav.map(({ to, label, Icon }) => {
-          const active =
-            to === "/" ? pathname === "/" : pathname.startsWith(to);
-
-          return (
-            <NavLink
-              key={to}
-              to={to}
-              end={to === "/"}
-              className={`flex flex-col items-center gap-1 rounded-2xl py-2 text-[0.7rem] font-medium transition-colors ${active ? "bg-foreground/10 text-foreground" : "text-muted-foreground"}`}
+            <button
+              type="submit"
+              disabled={!city.trim()}
+              className="absolute right-1.5 top-1/2 -translate-y-1/2 rounded-full bg-primary px-4 py-2 text-xs font-medium text-primary-foreground transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
             >
-              <Icon aria-hidden="true" className="size-5" />
-              {label}
-            </NavLink>
-          );
-        })}
-      </nav>
-    </>
+              <span className="hidden sm:inline">Search</span>
+
+              <FiSearch className="sm:hidden" />
+            </button>
+          </div>
+        </form>
+
+        {/* Refresh */}
+        <button
+          type="button"
+          onClick={onRefresh}
+          disabled={!onRefresh}
+          aria-label="Refresh weather"
+          className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-border bg-card text-muted-foreground transition hover:bg-secondary hover:text-foreground disabled:opacity-50"
+        >
+          <FiRefreshCw />
+        </button>
+      </div>
+    </header>
   );
 }
 
 export default Header;
+
+// import { NavLink, useLocation } from "react-router-dom";
+// import { useWeather } from "../hooks/useWeather.js";
+// import Search from "../pages/Search.jsx";
+// import { useDebounce } from "react-use";
+// import { useState, useEffect } from "react";
+// import {
+//   FiCloud,
+//   FiHome,
+//   FiSearch,
+//   FiSettings,
+//   FiSliders,
+// } from "react-icons/fi";
+
+// const nav = [
+//   { to: "/", label: "Home", Icon: FiHome },
+//   { to: "/search", label: "Search", Icon: FiSearch },
+//   { to: "/details", label: "Details", Icon: FiSliders },
+//   { to: "/settings", label: "Settings", Icon: FiSettings },
+// ];
+
+// function Header() {
+//   const { currentWeather, forecast, loading, error, fetchWeatherByCity } =
+//     useWeather();
+//   const { pathname } = useLocation();
+//   const [searchTerm, setSearchTerm] = useState("");
+//   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("");
+
+//   //Debounce the search term to prevent too many API requests
+//   //by waiting for 500ms after the user stops typing before making the API request
+//   useDebounce(
+//     () => {
+//       setDebouncedSearchTerm(searchTerm);
+//     },
+//     500,
+//     [searchTerm],
+//   );
+
+//   useEffect(() => {
+//   if (!searchTerm.trim()) return;
+
+//   const delayInputTimeoutId = setTimeout(() => {
+//     fetchWeatherByCity(searchTerm);
+//   }, 500);
+
+//   return () => clearTimeout(delayInputTimeoutId);
+// }, [searchTerm, fetchWeatherByCity]);
+
+//   useEffect(() => {
+//     // Prevent API calls on initial load when the string is empty
+//     if (!debouncedSearchTerm || debouncedSearchTerm.trim().length < 3){
+//       return;
+//     }
+
+//     fetchWeatherByCity(debouncedSearchTerm);
+//   }, [debouncedSearchTerm, fetchWeatherByCity]);
+
+//   return (
+//     <>
+//       {/* Desktop Header */}
+//       <header className="sticky top-0 z-40 lg:mx-15 px-3 pt-3 sm:px-6 sm:pt-5">
+//         <nav
+//           aria-label="Main"
+//           className="glass mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-3 rounded-full px-4 py-2.5 sm:px-5"
+//         >
+//           {/* Logo */}
+//           <NavLink
+//             to="/"
+//             className="flex min-w-0 items-center gap-2 font-display text-base font-semibold"
+//           >
+//             <FiCloud
+//               aria-hidden="true"
+//               className="size-5 shrink-0 text-primary"
+//             />
+
+//             <span className="truncate">Azure Weather</span>
+//           </NavLink>
+
+//           {/* Desktop Navigation */}
+//           <div className="flex shrink-0 items-center gap-1">
+//             {/* start */}
+//             <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+//              {/* end */}
+
+//             <div className="hidden items-center gap-1 md:flex">
+//               {nav.map(({ to, label, Icon }) => {
+//                 const active =
+//                   to === "/" ? pathname === "/" : pathname.startsWith(to);
+
+//                 return (
+//                   <NavLink
+//                     key={to}
+//                     to={to}
+//                     end={to === "/"}
+//                     className={`flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-medium transition-colors ${active ? "bg-foreground/10 text-foreground" : "text-muted-foreground"} hover:bg-foreground/8`}
+//                   >
+//                     <Icon aria-hidden="true" className="size-4" />
+//                     {label}
+//                   </NavLink>
+//                 );
+//               })}
+//             </div>
+//           </div>
+//         </nav>
+//       </header>
+
+//       {/* Mobile Floating Navigation (hidden for bigger screens)*/}
+//       <nav
+//         aria-label="Mobile"
+//         className="glass fixed inset-x-3 bottom-3 z-40 grid grid-cols-4 gap-1 rounded-3xl p-1.5 md:hidden"
+//       >
+//         {nav.map(({ to, label, Icon }) => {
+//           const active =
+//             to === "/" ? pathname === "/" : pathname.startsWith(to);
+
+//           return (
+//             <NavLink
+//               key={to}
+//               to={to}
+//               end={to === "/"}
+//               className={`flex flex-col items-center gap-1 rounded-2xl py-2 text-[0.7rem] font-medium transition-colors ${active ? "bg-foreground/10 text-foreground" : "text-muted-foreground"}`}
+//             >
+//               <Icon aria-hidden="true" className="size-5" />
+//               {label}
+//             </NavLink>
+//           );
+//         })}
+//       </nav>
+//     </>
+//   );
+// }
+
+// export default Header;
