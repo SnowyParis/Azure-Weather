@@ -1,4 +1,8 @@
-import { getWindDirection } from "../utils/weatherutils.js";
+import { getWindDirection,
+  getHumidityDescription,
+  getVisibilityDescription,
+  getPressureDescription 
+} from "../utils/weatherutils.js";
 import { getAqiCategory } from "../utils/airQuality";
 import HighlightCard from "./HighlightCard.jsx";
 import {
@@ -37,7 +41,7 @@ function Highlights({ weather, airQuality, loading }) {
       iconColor: "bg-primary/10 text-primary",
       title: "Humidity",
       value: `${weather.main.humidity}%`,
-      description: "",
+      description: `${getHumidityDescription(weather.main.humidity)}`,
     },
     {
       icon: <FiWind />,
@@ -58,14 +62,14 @@ function Highlights({ weather, airQuality, loading }) {
       iconColor: "bg-success/10 text-success",
       title: "Pressure",
       value: `${weather.main.pressure} hPa`,
-      description: "",
+      description: `${getPressureDescription(weather.main.pressure)}`,
     },
     {
       icon: <FiEye />,
       iconColor: "bg-primary/10 text-primary",
       title: "Visibility",
       value: `${(weather.visibility / 1000).toFixed(1)} km`,
-      description: "",
+      description: `${getVisibilityDescription(weather.visibility)}`,
     },
     // {
     //   icon: <FiSun />,

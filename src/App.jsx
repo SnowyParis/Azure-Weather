@@ -1,20 +1,19 @@
 import { useWeather } from "./hooks/useWeather.js";
 import { Routes, Route } from "react-router-dom";
-// import Header from "./components/Header.jsx";
 import Settings from "./pages/Settings.jsx";
 import { FiArrowUp } from "react-icons/fi";
 import Details from "./pages/Details.jsx";
 import Search from "./pages/Search.jsx";
 import Home from "./pages/Home.jsx";
-// import {
-//   getCurrentWeather,
-//   getWeatherForecast,
-//   getCityAirQuality,
-// } from "./services/weatherAPI.js";
+import {
+  getCurrentWeather,
+  getWeatherForecast,
+  getCityAirQuality,
+} from "./services/weatherAPI.js";
 // import "./App.css";
 
 function App() {
-  // console.log(getCurrentWeather("Cape Town"));
+  console.log(getCurrentWeather("Cape Town"));
   // console.log(getCityAirQuality("Cape Town"));
   // console.log(getWeatherForecast("Cape Town"));
 
