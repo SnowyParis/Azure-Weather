@@ -1,20 +1,16 @@
+import { getAqiCategory } from "../utils/airQuality";
+import HighlightCard from "./HighlightCard.jsx";
 import { getWindDirection,
   getHumidityDescription,
   getVisibilityDescription,
   getPressureDescription 
 } from "../utils/weatherutils.js";
-import { getAqiCategory } from "../utils/airQuality";
-import HighlightCard from "./HighlightCard.jsx";
 import {
   FiDroplet,
   FiWind,
   FiCompass,
   FiActivity,
   FiEye,
-  FiSun,
-  FiCloud,
-  FiThermometer,
-  FiUmbrella,
 } from "react-icons/fi";
 
 const icons = [
@@ -23,11 +19,6 @@ const icons = [
   FiCompass,
   FiActivity,
   FiEye,
-  FiSun,
-  FiCloud,
-  FiActivity,
-  FiThermometer,
-  FiUmbrella,
 ];
 
 function Highlights({ weather, airQuality, loading }) {
@@ -71,41 +62,6 @@ function Highlights({ weather, airQuality, loading }) {
       value: `${(weather.visibility / 1000).toFixed(1)} km`,
       description: `${getVisibilityDescription(weather.visibility)}`,
     },
-    // {
-    //   icon: <FiSun />,
-    //   iconColor: "bg-warning/10 text-warning",
-    //   title: "UV index",
-    //   value: `${weather.main.uvi}`,
-    //   description: "",
-    // },
-    // {
-    //   icon: <FiCloud />,
-    //   iconColor: "bg-primary/10 text-primary",
-    //   title: "Cloud cover",
-    //   value: `${weather.clouds}%`,
-    //   description: "",
-    // },
-    // {
-    //   icon: <FiActivity />,
-    //   iconColor: "bg-secondary text-muted-foreground",
-    //   title: "Air quality",
-    //   value: `${loading ? "..." : aqi ? `${aqi} AQI` : "—"}`,
-    //   description: `${aqiCategory?.label ?? "Loading..."}`,
-    // },
-    // {
-    //   icon: <FiThermometer />,
-    //   iconColor: "bg-secondary text-muted-foreground",
-    //   title: "Dew point",
-    //   value: `${weather.dew_point} °C`,
-    //   description: "",
-    // },
-    // {
-    //   icon: <FiUmbrella />,
-    //   iconColor: "bg-primary/10 text-primary",
-    //   title: "Rain probability",
-    //   value: `${Math.round(weather.rain * 100)}%`,
-    //   description: "",
-    // },
   ];
 
   return (
@@ -120,7 +76,7 @@ function Highlights({ weather, airQuality, loading }) {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+      <div className="grid max-[450px]:grid-cols-1 grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
         {WeatherStats.map(({ icon, iconColor, title, value, description }) => (
           <HighlightCard
             key={title}
@@ -128,7 +84,6 @@ function Highlights({ weather, airQuality, loading }) {
             iconColor={iconColor}
             title={title}
             value={value}
-            // progress={weather.main.humidity}
             description={description}
           />
         ))}

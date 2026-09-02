@@ -11,9 +11,23 @@ import {
 function CurrentWeather({ weather, aqi }) {
   return (
     <section className="glass-strong relative min-h-[380px] mt-6 overflow-hidden rounded-[2.5rem] p-6 sm:p-9">
-      <p className="mb-2 text-sm text-muted-foreground">
-        Good afternoon — here is your forecast
-      </p>
+      <div className="flex justify-between max-sm:flex-col-reverse max-sm:gap-3">
+        <p className="mb-2 text-sm text-muted-foreground">
+          Good afternoon — here is your forecast
+        </p>
+        
+        <div className="w-35 rounded-full px-3 py-1 text-xs bg-primary/30 text-primary">
+          <strong>
+            Local time{" "}
+            {new Date(weather.dt * 1000).toLocaleTimeString("en-US", {
+              hour: "2-digit",
+              minute: "2-digit",
+            })}
+          </strong>
+        </div>
+        
+        
+      </div>
 
       <div className="flex items-center gap-1.5">
         <FiMapPin className="text-xl text-primary" />
@@ -38,7 +52,7 @@ function CurrentWeather({ weather, aqi }) {
         })}
       </p>
 
-      <div className="absolute right-6 top-7 rounded-full px-3 py-1 text-xs bg-primary/30 text-primary sm:right-9">
+      {/* <div className="absolute right-6 top-7 rounded-full px-3 py-1 text-xs bg-primary/30 text-primary sm:right-9">
         <strong>
           Local time{" "}
           {new Date(weather.dt * 1000).toLocaleTimeString("en-US", {
@@ -46,9 +60,9 @@ function CurrentWeather({ weather, aqi }) {
             minute: "2-digit",
           })}
         </strong>
-      </div>
+      </div> */}
 
-      <div className="mt-10 flex flex-col items-start gap-5 sm:ml-11 sm:flex-row sm:items-center sm:gap-14">
+      <div className="mt-10 flex flex-col items-start gap-5 md:ml-11 md:flex-row md:items-center md:gap-14">
         <WeatherIcon type={weather.weather[0].main} size={150} />
 
         <div className="pl-10">
