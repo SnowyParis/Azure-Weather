@@ -78,7 +78,7 @@ function AirQuality({ data, loading, error }) {
       {/* Pollutants */}
       <div className="mt-6 grid grid-cols-2 gap-2 sm:grid-cols-3">
         {pollutants.map(([name, value]) => (
-          <div key={name} className="rounded-2xl bg-foreground/7 px-3 py-2">
+          <div key={name} className="rounded-3xl bg-foreground/11 px-3 py-2">
             <span className="block text-[0.68rem] text-muted-foreground">
               {name}
             </span>
@@ -91,12 +91,12 @@ function AirQuality({ data, loading, error }) {
       </div>
 
       {/* Description */}
-      <p className="mt-8 text-xs leading-relaxed text-muted-foreground">
+      <p className="mt-8 text-sm leading-relaxed text-muted-foreground">
         {category.description}
       </p>
 
       {/* Location */}
-      <p className="mt-3 text-xs text-muted-foreground">
+      <p className="mt-3 text-sm text-muted-foreground">
         Data for{" "}
         <span className="font-medium text-foreground">
           {data.location.name}
@@ -110,14 +110,14 @@ function Header() {
   return (
     <div className="flex items-center justify-between gap-3">
       <div className="flex items-center gap-2.5 text-muted-foreground">
-        <span className="grid h-9 w-9 place-items-center rounded-full bg-primary/10 text-primary">
+        <span className="grid h-9 w-9 place-items-center rounded-full bg-primary/30 text-primary">
           <FiActivity />
         </span>
 
         <span>Air quality</span>
       </div>
 
-      <span className="rounded-full bg-primary/10 px-3 py-1 text-xs text-primary">
+      <span className="rounded-full bg-primary/30 px-3 py-1 text-xs text-primary">
         Live
       </span>
     </div>

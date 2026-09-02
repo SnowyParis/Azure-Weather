@@ -10,7 +10,6 @@ import {
   getWeatherForecast,
   getCityAirQuality,
 } from "./services/weatherAPI.js";
-// import "./App.css";
 
 function App() {
   console.log(getCurrentWeather("Cape Town"));

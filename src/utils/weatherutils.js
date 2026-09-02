@@ -72,12 +72,16 @@ export const getVisibilityDescription = (visibility) => {
 
 export const getPressureDescription = (pressure) => {
   switch (true) {
-    case (pressure === 1013.25):
+    case (pressure === 1013):
       return "Standard Pressure";
-    case (pressure >= 1020): 
-      return "High Pressure";
-    case (pressure <= 1000 ):
+    case (pressure < 1000 ):
       return "Low Pressure";
+    case (pressure >= 1000 && pressure < 1010):
+      return "Low Pressure Starting";
+    case (pressure >= 1010 && pressure < 1020):
+      return "Normal Pressure";
+    case (pressure >= 1020): 
+      return "Strong High Pressure";
     default:
       return "";
   }

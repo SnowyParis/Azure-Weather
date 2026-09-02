@@ -41,10 +41,10 @@ function Header({ onSearch, onRefresh, currentCity }) {
   return (
     <>
       {/* Desktop Header */}
-      <header className="sticky top-0 z-40 lg:mx-0 px-3 pt-3 sm:px-6 sm:pt-5">
+      <header className="sticky top-0 z-40 lg:mx-auto px-3 pt-3 sm:px-4 sm:pt-5">
         <nav
           aria-label="Main"
-          className="glass mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-3 rounded-full px-4 py-2.5 sm:px-5"
+          className="glass mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-3 rounded-full pl-4 pr-1 py-2.5 sm:px-5"
         >
           {/* Logo */}
           <NavLink
@@ -63,25 +63,25 @@ function Header({ onSearch, onRefresh, currentCity }) {
           <div className="flex shrink-0 items-center gap-1">
 
             {/* Search */}
-            <form onSubmit={handleSubmit} className="mx-auto flex w-70 max-w-xl">
-              <div className="relative lg:w-65 w-50">
+            <form onSubmit={handleSubmit} className="mx-auto flex w-55 max-[470px]:w-45 max-w-xl">
+              <div className="relative w-50 max-[470px]:w-40">
                 <input
                   type="search"
                   value={city}
                   onChange={(event) => setCity(event.target.value)}
                   placeholder="Search for a city..."
                   aria-label="Search for a city"
-                  className="h-9 lg:w-55 w-40 rounded-full border border-border bg-card pl-4 pr-4 text-sm outline-none transition placeholder:text-muted-foreground focus:border-primary focus:ring-2 focus:ring-primary/20"
+                  className="max-[470px]:w-30 h-9 w-40 rounded-full border border-border bg-card pl-3 pr-4 text-sm outline-none transition placeholder:text-muted-foreground focus:border-primary focus:ring-2 focus:ring-primary/20"
                 />
 
                 <button
                   type="submit"
                   disabled={!city.trim()} //if there is no value
-                  className="absolute right-0 top-1/2 -translate-y-1/2 rounded-full bg-primary/30 px-2 py-2 text-xs font-medium text-primary-foreground transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
+                  className="absolute right-0 top-1/2 -translate-y-1/2 rounded-full bg-primary/35 px-2 py-2 text-xs font-medium text-primary-foreground transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   <span className="hidden sm:inline text-muted-foreground"><FiSearch size={18} /></span>
 
-                  <FiSearch className="sm:hidden" />
+                  <FiSearch className="sm:hidden text-muted-foreground size-4" />
                 </button>
               </div>
             </form>
@@ -92,12 +92,13 @@ function Header({ onSearch, onRefresh, currentCity }) {
               onClick={onRefresh}
               disabled={!onRefresh}
               aria-label="Refresh weather"
-              className="grid mr-3 h-8 w-10 shrink-0 place-items-center rounded-full border border-border bg-card text-muted-foreground transition hover:bg-secondary hover:text-foreground disabled:opacity-50"
+              className="max-[520px]:hidden grid mr-3 h-8 w-8 shrink-0 place-items-center rounded-full border border-border bg-card text-muted-foreground transition hover:bg-secondary hover:text-foreground disabled:opacity-50"
             >
               <FiRefreshCw />
             </button>
 
-            <div className="hidden items-center gap-1 md:flex">
+            {/* max-[600px]: md:flex */}
+            <div className="hidden items-center gap-1 min-[880px]:flex">
               {nav.map(({ to, label, Icon }) => {
                 const active =
                   to === "/" ? pathname === "/" : pathname.startsWith(to);
@@ -140,6 +141,21 @@ function Header({ onSearch, onRefresh, currentCity }) {
             </NavLink>
           );
         })}
+
+        {/* Refresh */}
+        <div className="flex flex-col items-center gap-1">
+          <button
+            type="button"
+            onClick={onRefresh}
+            disabled={!onRefresh}
+            aria-label="Refresh weather"
+            className="min-[520px]:hidden grid mr-2 h-7 w-7 shrink-0 place-items-center rounded-full text-muted-foreground transition hover:bg-secondary hover:text-foreground disabled:opacity-50"
+          >
+            <FiRefreshCw />
+          </button>
+
+          <span className="text-[0.7rem] font-medium text-muted-foreground">Refresh</span>
+        </div>
       </nav>
     </>
   );

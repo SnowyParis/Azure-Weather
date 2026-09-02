@@ -38,7 +38,7 @@ function CurrentWeather({ weather, aqi }) {
         })}
       </p>
 
-      <div className="absolute right-6 top-7 rounded-full px-3 py-1 text-xs bg-primary/10 text-primary sm:right-9">
+      <div className="absolute right-6 top-7 rounded-full px-3 py-1 text-xs bg-primary/30 text-primary sm:right-9">
         <strong>
           Local time{" "}
           {new Date(weather.dt * 1000).toLocaleTimeString("en-US", {
@@ -69,12 +69,12 @@ function CurrentWeather({ weather, aqi }) {
           </p>
 
           <div className="mt-4 flex flex-wrap gap-2">
-            <span className="flex items-center gap-1 rounded-full bg-destructive/10 px-2.5 py-1 text-xs text-destructive">
+            <span className="flex items-center gap-1 rounded-full bg-warning/20 px-2.5 py-1 text-xs text-warning">
               <FiArrowUp className="text-sm" />
               <strong>High {formatTemperature(weather.main.temp_max)}°C</strong>
             </span>
 
-            <span className="flex items-center gap-1 rounded-full bg-primary/10 px-2.5 py-1 text-xs text-primary">
+            <span className="flex items-center gap-1 rounded-full bg-primary/30 px-2.5 py-1 text-xs text-primary">
               <FiArrowDown className="text-sm" />
               <strong>Low {formatTemperature(weather.main.temp_min)}°C</strong>
             </span>
@@ -87,12 +87,12 @@ function CurrentWeather({ weather, aqi }) {
           </div>
 
           <div className="flex items-center gap-2.5 mt-3 flex-wrap">
-            <span className="flex items-center gap-1.5 rounded-full bg-muted px-2.5 py-1 text-xs text-muted-foreground">
+            <span className="flex items-center gap-1.5 rounded-full bg-muted/50 text-muted-foreground px-2.5 py-1 text-xs">
               <FiSunrise className="text-sm" />
               <strong>Sunrise {formatTime(weather.sys.sunrise)}</strong>
             </span>
 
-            <span className="flex items-center gap-1.5 rounded-full bg-muted px-2.5 py-1 text-xs text-muted-foreground">
+            <span className="flex items-center gap-1.5 rounded-full bg-muted/50 px-2.5 py-1 text-xs text-muted-foreground">
               <FiSunset className="text-sm" />
               <strong>Sunset {formatTime(weather.sys.sunset)}</strong>
             </span>

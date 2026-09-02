@@ -65,7 +65,7 @@ function Home() {
         currentCity={city}
       />
 
-      <main className="mx-0 px-4 py-4 sm:px-6 lg:px-8">
+      <main className="mx-0 px-2 py-2 sm:px-6 lg:px-8">
         {error && !currentWeather ? (
           <div className="glass rounded-[2rem] p-8 text-center">
             <h2 className="text-xl font-semibold">Unable to load weather</h2>

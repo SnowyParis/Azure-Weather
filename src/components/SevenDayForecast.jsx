@@ -44,7 +44,7 @@ function SevenDayForecast({ forecast }) {
 
             <WeatherIcon type={item.weather[0].main} size={24} />
 
-            <span className="hidden first-letter:uppercase text-xs text-muted-foreground sm:block">
+            <span className="hidden first-letter:uppercase text-sm text-muted-foreground sm:block">
               {item.weather[0].description} <strong> • </strong>
               Wind {item.wind.speed.toFixed(1)} km/h <strong> • </strong>
               Humidity {item.main.humidity}%
@@ -54,14 +54,14 @@ function SevenDayForecast({ forecast }) {
               Humidity {item.main.humidity}%
             </span> */}
 
-            <div className="flex items-center justify-end gap-1.5 text-xs text-muted-foreground">
+            <div className="flex items-center justify-end gap-1.5 text-sm text-muted-foreground">
               <span>{formatTemperature(item.main.temp_min)}°</span>
 
               <div className="h-1.5 w-6 overflow-hidden rounded-full bg-muted sm:w-12">
                 <div className="h-full w-[100%] rounded-full bg-linear-to-r from-primary to-accent" />
               </div>
 
-              <strong className="text-foreground">
+              <strong className="text-xs text-foreground">
                 {formatTemperature(item.main.temp_max)}°
               </strong>
             </div>
