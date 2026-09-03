@@ -4,7 +4,6 @@ import { useAirQuality } from "../hooks/useAirQuality";
 import { useWeather } from "../hooks/useWeather.js";
 import { useSearchParams } from "react-router-dom";
 import Highlights from "../components/Highlights";
-// import BackToTop from "../components/BackToTop";
 import AirQuality from "../components/AirQuality";
 import Header from "../components/Header.jsx";
 import { useState, useEffect } from "react";
@@ -104,7 +103,6 @@ function Home() {
             )}
 
             {forecast && <SevenDayForecast forecast={forecast} />}
-            {/* <BackToTop /> */}
           </div>
         )}
       </main>
