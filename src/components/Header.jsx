@@ -52,7 +52,7 @@ function Header({ onSearch, onRefresh, currentCity }) {
               className="size-5 shrink-0 text-primary"
             />
 
-            <span className="truncate">Azure Weather</span>
+            <span className="max-[360px]:text-sm">Azure <span className="max-[415px]:hidden">Weather</span> </span>
           </NavLink>
 
           {/* Desktop Navigation */}

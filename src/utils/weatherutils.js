@@ -3,14 +3,14 @@ export const formatTemperature = (temp) => {
 };
 
 export const formatTime = (timestamp) => {
-  return new Date(timestamp * 1000).toLocaleTimeString("en-US", {
+  return new Date(timestamp * 1000).toLocaleTimeString("en-GB", {
     hour: "2-digit",
     minute: "2-digit",
   });
 };
 
 export const formatDate = (timestamp) => {
-  return new Date(timestamp * 1000).toLocaleDateString("en-US", {
+  return new Date(timestamp * 1000).toLocaleDateString("en-GB", {
     weekday: "short",
     month: "short",
     day: "numeric",
@@ -85,4 +85,18 @@ export const getPressureDescription = (pressure) => {
     default:
       return "";
   }
+}
+
+export const TimeGreeting = (localTime) => {
+  const currentHour = new Date(localTime).getHours();
+
+  if (currentHour >= 5 && currentHour < 12) {
+    return 'morning';
+  } else if (currentHour >= 12 && currentHour < 18) {
+    return 'afternoon';
+  } else {
+    return 'evening';
+  }
+
+  return "day";
 }

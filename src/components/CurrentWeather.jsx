@@ -1,5 +1,5 @@
 import WeatherIcon from "./WeatherIcon.jsx";
-import { formatTemperature, formatTime } from "../utils/weatherutils.js";
+import { formatTemperature, formatTime, TimeGreeting } from "../utils/weatherutils.js";
 import {
   FiMapPin,
   FiArrowUp,
@@ -13,13 +13,13 @@ function CurrentWeather({ weather, aqi }) {
     <section className="glass-strong relative min-h-[380px] mt-4 overflow-hidden rounded-[2.5rem] p-6 sm:p-9">
       <div className="flex justify-between max-sm:flex-col-reverse max-sm:gap-3">
         <p className="mb-2 font-medium text-sm text-muted-foreground">
-          Good afternoon — here is your forecast
+          Good {TimeGreeting(new Date(weather.dt * 1000).toLocaleTimeString("en-GB"))} — here is your forecast
         </p>
         
-        <div className="w-35 rounded-full px-3 py-1 text-xs bg-primary/30 text-primary">
+        <div className="w-30 rounded-full px-3 py-1 text-xs bg-primary/30 text-primary">
           <strong>
             Local time{" "}
-            {new Date(weather.dt * 1000).toLocaleTimeString("en-US", {
+            {new Date(weather.dt * 1000).toLocaleTimeString("en-GB", {
               hour: "2-digit",
               minute: "2-digit",
             })}
@@ -38,13 +38,13 @@ function CurrentWeather({ weather, aqi }) {
       <p className="mt-1 text-sm text-muted-foreground">
         {aqi.location.state && (<span>{aqi.location.state}, </span>)}
         {weather.sys.country} •{" "}
-        {new Date(weather.dt * 1000).toLocaleDateString("en-US", {
+        {new Date(weather.dt * 1000).toLocaleDateString("en-GB", {
           weekday: "long",
           month: "short",
           day: "numeric",
         })}{" "}
         •{" "}
-        {new Date(weather.dt * 1000).toLocaleTimeString("en-US", {
+        {new Date(weather.dt * 1000).toLocaleTimeString("en-GB", {
           hour: "2-digit",
           minute: "2-digit",
         })}
