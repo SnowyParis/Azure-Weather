@@ -46,7 +46,7 @@ function AirQuality({ data, loading, error }) {
   ];
 
   return (
-    <section className="glass min-h-[460px] rounded-[2rem] p-6">
+    <section className="glass max-[285px]:max-w-[260px] min-h-[460px] rounded-[2rem] p-6">
       <Header />
 
       {/* AQI */}
@@ -67,7 +67,7 @@ function AirQuality({ data, loading, error }) {
       </div>
 
       {/* AQI scale */}
-      <div className="mt-2 flex justify-between font-medium text-[13px] text-muted-foreground">
+      <div className="mt-2 flex justify-between font-medium text-[12px] sm:text-[13px] text-muted-foreground">
         <span>Good</span>
         <span>Fair</span>
         <span>Moderate</span>
@@ -117,7 +117,7 @@ function Header() {
         <span>Air quality</span>
       </div>
 
-      <span className="rounded-full bg-primary/30 px-3 py-1 text-xs text-primary">
+      <span className="rounded-full bg-primary/30 px-3 py-1 font-medium text-sm text-primary">
         Live
       </span>
     </div>

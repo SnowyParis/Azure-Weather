@@ -25,8 +25,6 @@ function CurrentWeather({ weather, aqi }) {
             })}
           </strong>
         </div>
-        
-        
       </div>
 
       <div className="flex items-center gap-1.5">
@@ -39,28 +37,18 @@ function CurrentWeather({ weather, aqi }) {
 
       <p className="mt-1 text-sm text-muted-foreground">
         {aqi.location.state && (<span>{aqi.location.state}, </span>)}
-        {weather.sys.country} ·{" "}
+        {weather.sys.country} •{" "}
         {new Date(weather.dt * 1000).toLocaleDateString("en-US", {
           weekday: "long",
           month: "short",
           day: "numeric",
         })}{" "}
-        ·{" "}
+        •{" "}
         {new Date(weather.dt * 1000).toLocaleTimeString("en-US", {
           hour: "2-digit",
           minute: "2-digit",
         })}
       </p>
-
-      {/* <div className="absolute right-6 top-7 rounded-full px-3 py-1 text-xs bg-primary/30 text-primary sm:right-9">
-        <strong>
-          Local time{" "}
-          {new Date(weather.dt * 1000).toLocaleTimeString("en-US", {
-            hour: "2-digit",
-            minute: "2-digit",
-          })}
-        </strong>
-      </div> */}
 
       <div className="mt-10 flex flex-col items-start gap-5 md:ml-11 md:flex-row md:items-center md:gap-14">
         <WeatherIcon type={weather.weather[0].main} size={150} />
@@ -113,17 +101,6 @@ function CurrentWeather({ weather, aqi }) {
           </div>
         </div>
       </div>
-
-      {/* <div className="rounded-2xl bg-secondary p-3">
-        <span className="flex items-center gap-1 text-xs text-muted-foreground">
-          <FiSunrise />
-          Sunrise
-        </span>
-
-        <strong className="mt-1 block text-xl font-medium text-foreground">
-          {formatTime(weather.sys.sunrise)}
-        </strong>
-      </div> */}
     </section>
   );
 }
