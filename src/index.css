@@ -187,14 +187,14 @@
     min-height: 100vh;
 
     background:
-      linear-gradient(135deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)),
+      linear-gradient(135deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.2)),
       linear-gradient(
         135deg,
         var(--sky-from),
         var(--sky-via),
         var(--sky-to)
       );
-      filter: brightness(1.1);
+      /* filter: brightness(1.1); */
 
     background-attachment: fixed;
     background-color: var(--color-background);

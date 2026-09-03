@@ -10,9 +10,9 @@ import {
 
 function CurrentWeather({ weather, aqi }) {
   return (
-    <section className="glass-strong relative min-h-[380px] mt-6 overflow-hidden rounded-[2.5rem] p-6 sm:p-9">
+    <section className="glass-strong relative min-h-[380px] mt-4 overflow-hidden rounded-[2.5rem] p-6 sm:p-9">
       <div className="flex justify-between max-sm:flex-col-reverse max-sm:gap-3">
-        <p className="mb-2 text-sm text-muted-foreground">
+        <p className="mb-2 font-medium text-sm text-muted-foreground">
           Good afternoon — here is your forecast
         </p>
         

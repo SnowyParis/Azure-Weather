@@ -1,10 +1,6 @@
-
-
 import { NavLink, useLocation } from "react-router-dom";
 import { useWeather } from "../hooks/useWeather.js";
-import Search from "../pages/Search.jsx";
-import { useDebounce } from "react-use";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   FiCloud,
   FiHome,
@@ -123,7 +119,7 @@ function Header({ onSearch, onRefresh, currentCity }) {
       {/* Mobile Floating Navigation (hidden for bigger screens)*/}
       <nav
         aria-label="Mobile"
-        className="glass fixed inset-x-3 bottom-3 z-40 grid grid-cols-4 gap-1 rounded-3xl p-1.5 md:hidden"
+        className="glass fixed inset-x-3 bottom-3 z-40 grid grid-cols-4 gap-1 rounded-3xl p-1.5 min-[880px]:hidden"
       >
         {nav.map(({ to, label, Icon }) => {
           const active =
@@ -143,13 +139,13 @@ function Header({ onSearch, onRefresh, currentCity }) {
         })}
 
         {/* Refresh */}
-        <div className="flex flex-col items-center gap-1">
+        <div className="flex flex-col min-[520px]:hidden items-center gap-1">
           <button
             type="button"
             onClick={onRefresh}
             disabled={!onRefresh}
             aria-label="Refresh weather"
-            className="min-[520px]:hidden grid mr-2 h-7 w-7 shrink-0 place-items-center rounded-full text-muted-foreground transition hover:bg-secondary hover:text-foreground disabled:opacity-50"
+            className="grid mr-2 h-7 w-7 shrink-0 place-items-center rounded-full text-muted-foreground transition hover:bg-secondary hover:text-foreground disabled:opacity-50"
           >
             <FiRefreshCw />
           </button>

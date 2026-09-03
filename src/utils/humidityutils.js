@@ -1,4 +1,4 @@
-export function getHumidityCategory(humidity) {
+export function getHumidityDescription(humidity) {
     switch (true) {
         case (humidity < 30):
             return "Low Humidity";
