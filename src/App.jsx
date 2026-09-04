@@ -14,12 +14,12 @@ function App() {
             <Route path="/details" element={<Details />} />
             <Route path="/settings" element={<Settings />} />
           </Routes>
-        </main>    
-      </div>
+        </main>  
 
-      <footer className="border-t border-border/50 py-6 text-center text-xs text-muted-foreground">
+        <footer className="border-t border-border/50 py-6 text-center text-xs text-muted-foreground">
         © {new Date().getFullYear()} Azure Weather. Update your day.
-      </footer>
+        </footer>
+      </div>
 
       <BackToTop />
     </>
