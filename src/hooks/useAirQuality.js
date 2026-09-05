@@ -1,5 +1,5 @@
 import { getCityAirQuality } from "../services/weatherApi";
-import { useEffect, useState, useCallback } from "react";
+import { useState, useCallback } from "react";
 
 export function useAirQuality(city) {
   const [data, setData] = useState(null);

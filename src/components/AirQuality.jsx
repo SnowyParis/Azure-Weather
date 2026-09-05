@@ -1,10 +1,10 @@
-import { FiActivity } from "react-icons/fi";
 import { getAqiCategory, formatPollutant } from "../utils/airQuality";
+import { FiActivity } from "react-icons/fi";
 
 function AirQuality({ data, loading, error }) {
   if (loading) {
     return (
-      <section className="glass min-h-[460px] rounded-[2rem] p-6">
+      <section className="glass min-h-115 rounded-4xl p-6">
         <Header />
 
         <div className="mt-12 flex items-center justify-center">
@@ -19,7 +19,7 @@ function AirQuality({ data, loading, error }) {
 
   if (error) {
     return (
-      <section className="glass min-h-[460px] rounded-[2rem] p-6">
+      <section className="glass min-h-115 rounded-4xl p-6">
         <Header />
 
         <div className="mt-10 rounded-2xl bg-destructive/10 p-4 text-sm text-destructive">
@@ -46,7 +46,7 @@ function AirQuality({ data, loading, error }) {
   ];
 
   return (
-    <section className="glass max-[285px]:max-w-[260px] min-h-[460px] rounded-[2rem] p-6">
+    <section className="glass max-[285px]:max-w-65 min-h-115 rounded-4xl p-6">
       <Header />
 
       {/* AQI */}

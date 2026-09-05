@@ -2,7 +2,6 @@ import { useState, useEffect, useCallback } from "react";
 import {
   getCurrentWeather,
   getWeatherForecast,
-  searchCities,
 } from "../services/weatherAPI.js";
 
 export const useWeather = (city) => {

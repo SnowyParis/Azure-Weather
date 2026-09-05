@@ -42,61 +42,59 @@ export const getWindDirection = (deg) => {
 
 export const getHumidityDescription = (humidity) => {
   switch (true) {
-    case (humidity < 30):
+    case humidity < 30:
       return "Low Humidity";
-    case (humidity >= 30 && humidity < 60):
+    case humidity >= 30 && humidity < 60:
       return "Normal Humidity";
-    case (humidity >= 60):
+    case humidity >= 60:
       return "High Humidity";
-    case (humidity === 100):
+    case humidity === 100:
       return "Saturated Air";
     default:
       return "";
   }
-}
+};
 
 export const getVisibilityDescription = (visibility) => {
   switch (true) {
-    case (visibility < 1000):
+    case visibility < 1000:
       return "Very Poor";
-    case (visibility >= 1000 && visibility < 4000): 
+    case visibility >= 1000 && visibility < 4000:
       return "Poor";
-    case (visibility >= 4000 && visibility < 10000):
+    case visibility >= 4000 && visibility < 10000:
       return "Moderate";
-    case (visibility >= 10000):
+    case visibility >= 10000:
       return "Good/Clear";
     default:
       return "";
   }
-}
+};
 
 export const getPressureDescription = (pressure) => {
   switch (true) {
-    case (pressure === 1013):
+    case pressure === 1013:
       return "Standard Pressure";
-    case (pressure < 1000 ):
+    case pressure < 1000:
       return "Low Pressure";
-    case (pressure >= 1000 && pressure < 1010):
+    case pressure >= 1000 && pressure < 1010:
       return "Low Pressure Starting";
-    case (pressure >= 1010 && pressure < 1020):
+    case pressure >= 1010 && pressure < 1020:
       return "Normal Pressure";
-    case (pressure >= 1020): 
+    case pressure >= 1020:
       return "Strong High Pressure";
     default:
       return "";
   }
-}
+};
 
 export const TimeGreeting = (localTime) => {
   const currentHour = new Date(localTime).getHours();
 
   if (currentHour >= 5 && currentHour < 12) {
-    return 'morning';
+    return "morning";
   } else if (currentHour >= 12 && currentHour < 18) {
-    return 'afternoon';
+    return "afternoon";
   } else {
-    return 'evening';
+    return "evening";
   }
-
-  return "day";
-}
+};

@@ -1,6 +1,5 @@
-// import { FiChevronDown } from "react-icons/fi";
-import WeatherIcon from "./WeatherIcon.jsx";
 import { formatTemperature } from "../utils/weatherutils.js";
+import WeatherIcon from "./WeatherIcon.jsx";
 
 function SevenDayForecast({ forecast }) {
   const dailyForecast = forecast.list.reduce((acc, item) => {
@@ -23,12 +22,12 @@ function SevenDayForecast({ forecast }) {
           7-day forecast
         </h2>
 
-        {/* <p className="mt-1 text-xs text-muted-foreground">
-          Tap a day for the full breakdown
-        </p> */}
+        <p className="mt-1 text-xs text-muted-foreground">
+          A plan for each day
+        </p>
       </div>
 
-      <div className="glass overflow-hidden rounded-[2rem] px-2">
+      <div className="glass overflow-hidden rounded-4xl px-2">
         {dailyItems.map((item, index) => (
           <div
             key={index}
@@ -38,14 +37,14 @@ function SevenDayForecast({ forecast }) {
               {index === 0
                 ? "Today"
                 : new Date(item.dt * 1000).toLocaleDateString("en-US", {
-                    weekday: "short",
-                  })}
+                  weekday: "short",
+                })}
             </strong>
 
             <WeatherIcon type={item.weather[0].main} size={24} />
 
             <span className=" sm:ml-8 ml:0 first-letter:uppercase text-sm text-muted-foreground ">
-              <span>{item.weather[0].description}</span> 
+              <span>{item.weather[0].description}</span>
               <span className="max-sm:hidden"><strong> • </strong> Wind {item.wind.speed.toFixed(1)} km/h <strong> • </strong></span>
               <span className="max-sm:hidden">Humidity {item.main.humidity}%</span>
             </span>
@@ -54,17 +53,13 @@ function SevenDayForecast({ forecast }) {
               <span>{formatTemperature(item.main.temp_min)}°</span>
 
               <div className="h-1.5 w-6 overflow-hidden rounded-full bg-muted sm:w-12">
-                <div className="h-full w-[100%] rounded-full bg-linear-to-r from-primary to-accent" />
+                <div className="h-full w-full rounded-full bg-linear-to-r from-primary to-accent" />
               </div>
 
               <strong className="text-xs text-foreground">
                 {formatTemperature(item.main.temp_max)}°
               </strong>
             </div>
-
-            {/* <button className="text-muted-foreground">
-              <FiChevronDown />
-            </button> */}
           </div>
         ))}
       </div>

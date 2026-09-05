@@ -1,9 +1,9 @@
-import { getAqiCategory } from "../utils/airQuality";
 import HighlightCard from "./HighlightCard.jsx";
-import { getWindDirection,
+import {
+  getWindDirection,
   getHumidityDescription,
   getVisibilityDescription,
-  getPressureDescription 
+  getPressureDescription
 } from "../utils/weatherutils.js";
 import {
   FiDroplet,
@@ -13,19 +13,7 @@ import {
   FiEye,
 } from "react-icons/fi";
 
-const icons = [
-  FiDroplet,
-  FiWind,
-  FiCompass,
-  FiActivity,
-  FiEye,
-];
-
-function Highlights({ weather, airQuality, loading }) {
-  const aqi = airQuality ? Number(airQuality.main.aqi) : null;
-
-  const aqiCategory = aqi ? getAqiCategory(aqi) : null;
-
+function Highlights({ weather }) {
   const WeatherStats = [
     {
       icon: <FiDroplet />,

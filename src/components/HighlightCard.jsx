@@ -1,6 +1,6 @@
 function HighlightCard({ icon, iconColor, title, value, description }) {
   return (
-    <article className="glass mb-6 max-h-[155px] max-w-[195px] rounded-3xl p-5">
+    <article className="glass mb-6 max-h-38.75 max-w-48.75 rounded-3xl p-5">
       <div className="flex items-center gap-2.5 text-sm text-muted-foreground">
         <span className={`grid h-8 w-8 shrink-0 place-items-center rounded-full ${iconColor}`}>
           {icon}

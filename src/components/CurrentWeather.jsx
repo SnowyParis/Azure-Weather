@@ -1,5 +1,5 @@
-import WeatherIcon from "./WeatherIcon.jsx";
 import { formatTemperature, formatTime, TimeGreeting } from "../utils/weatherutils.js";
+import WeatherIcon from "./WeatherIcon.jsx";
 import {
   FiMapPin,
   FiArrowUp,
@@ -10,12 +10,12 @@ import {
 
 function CurrentWeather({ weather, aqi }) {
   return (
-    <section className="glass-strong relative min-h-[380px] mt-4 overflow-hidden rounded-[2.5rem] p-6 sm:p-9">
+    <section className="glass-strong relative min-h-95 mt-4 overflow-hidden rounded-[2.5rem] p-6 sm:p-9">
       <div className="flex justify-between max-sm:flex-col-reverse max-sm:gap-3">
         <p className="mb-2 font-medium text-sm text-muted-foreground">
           Good {TimeGreeting(new Date(weather.dt * 1000).toLocaleTimeString("en-GB"))} — here is your forecast
         </p>
-        
+
         <div className="w-30 rounded-full px-3 py-1 text-xs bg-primary/30 text-primary">
           <strong>
             Local time{" "}
