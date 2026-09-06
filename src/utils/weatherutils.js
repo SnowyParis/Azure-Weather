@@ -88,7 +88,8 @@ export const getPressureDescription = (pressure) => {
 };
 
 export const TimeGreeting = (localTime) => {
-  const currentHour = new Date(localTime).getHours();
+  // Splits "14:30" into ["14", "30"] and converts "14" to a number
+  const currentHour = parseInt(localTime.split(":")[0], 10);
 
   if (currentHour >= 5 && currentHour < 12) {
     return "morning";

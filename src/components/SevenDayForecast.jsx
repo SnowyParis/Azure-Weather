@@ -22,7 +22,7 @@ function SevenDayForecast({ forecast }) {
           7-day forecast
         </h2>
 
-        <p className="mt-1 text-xs text-muted-foreground">
+        <p className="mt-1 text-sm text-muted-foreground">
           A plan for each day
         </p>
       </div>

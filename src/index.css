@@ -35,7 +35,7 @@
 
   --card: oklch(1 0 0 / 22%);
   --card-foreground: oklch(0.279 0.036 258.4);
-  
+
   --primary: oklch(0.663 0.157 258.3);
   --primary-foreground: oklch(0.99 0.003 250);
   --secondary: oklch(1 0 0 / 38%);
@@ -81,12 +81,7 @@
 
     background:
       linear-gradient(135deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.2)),
-      linear-gradient(
-        135deg,
-        var(--sky-from),
-        var(--sky-via),
-        var(--sky-to)
-      );
+      linear-gradient(135deg, var(--sky-from), var(--sky-via), var(--sky-to));
 
     background-attachment: fixed;
     background-color: var(--color-background);

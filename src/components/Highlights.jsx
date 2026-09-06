@@ -59,7 +59,7 @@ function Highlights({ weather }) {
           Today's highlights
         </h2>
 
-        <p className="mt-1 text-xs text-muted-foreground">
+        <p className="mt-1 text-sm text-muted-foreground">
           Every measurement that shapes how the day feels
         </p>
       </div>

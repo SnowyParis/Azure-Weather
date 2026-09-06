@@ -13,7 +13,10 @@ function CurrentWeather({ weather, aqi }) {
     <section className="glass-strong relative min-h-95 mt-4 overflow-hidden rounded-[2.5rem] p-6 sm:p-9">
       <div className="flex justify-between max-sm:flex-col-reverse max-sm:gap-3">
         <p className="mb-2 font-medium text-sm text-muted-foreground">
-          Good {TimeGreeting(new Date(weather.dt * 1000).toLocaleTimeString("en-GB"))} — here is your forecast
+          Good {TimeGreeting(new Date(weather.dt * 1000).toLocaleTimeString("en-GB", {
+            hour: "2-digit",
+            minute: "2-digit",
+          }))} — here is your forecast
         </p>
 
         <div className="w-30 rounded-full px-3 py-1 text-xs bg-primary/30 text-primary">
@@ -51,7 +54,9 @@ function CurrentWeather({ weather, aqi }) {
       </p>
 
       <div className="mt-10 flex flex-col items-start gap-5 md:ml-11 md:flex-row md:items-center md:gap-14">
-        <WeatherIcon type={weather.weather[0].main} size={150} />
+        {TimeGreeting(new Date(weather.dt * 1000).toLocaleTimeString("en-GB")) === "evening" ?
+          <WeatherIcon type={Moon} size={150} /> :
+          <WeatherIcon type={weather.weather[0].main} size={150} />}
 
         <div className="pl-10">
           <div className="text-[68px] font-medium leading-none tracking-[-5px] text-foreground sm:text-[96px]">
