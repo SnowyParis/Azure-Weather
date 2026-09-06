@@ -12,10 +12,8 @@ The application was designed with a clean, modern dashboard interface that makes
 * 🌬️ **Air Quality** — View OpenWeather AQI information and individual pollutant levels.
 * ☀️ **Sunrise & Sunset** — View local sunrise and sunset times.
 * 💨 **Wind Information** — View wind speed, direction, and gusts.
-* 💧 **Humidity & Dew Point** — Monitor atmospheric moisture levels.
-* 🌧️ **Rain Probability** — View the likelihood of precipitation.
+* 💧 **Humidity** — Monitor atmospheric moisture levels.
 * 📱 **Responsive Design** — Optimized for desktop, tablet, and mobile devices.
-* ⏳ **Loading States** — Skeleton/shimmer loading states provide visual feedback while weather data is being retrieved.
 * ⚠️ **Error Handling** — Displays useful error messages when a location cannot be found or an API request fails.
 * 🧭 **Client-Side Routing** — Uses React Router for navigation between application views.
 
@@ -59,17 +57,18 @@ src/
 │   ├── AirQuality.jsx
 │   ├── CurrentWeather.jsx
 │   ├── Highlights.jsx
-│   ├── HourlyForecast.jsx
+│   ├── HighlightCard.jsx
 │   ├── SevenDayForecast.jsx
-│   ├── SunriseSunset.jsx
 │   └── ...
 │
 ├── hooks/
+│   ├── useAirQuality.js
 │   └── useWeather.js
 │
 ├── pages/
 │   ├── Home.jsx
 │   ├── Search.jsx
+│   ├── Settings.jsx
 │   └── Details.jsx
 │
 ├── services/
@@ -77,7 +76,7 @@ src/
 │
 ├── utils/
 │   ├── airQuality.js
-│   └── weather.js
+│   └── weatherutils.js
 │
 ├── App.jsx
 ├── main.jsx
