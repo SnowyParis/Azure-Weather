@@ -20,6 +20,17 @@ The application was designed with a clean, modern dashboard interface that makes
 * 🧭 **Client-Side Routing** — Uses React Router for navigation between application views.
 
 ---
+##🖥️ Preview
+<p align="center">
+  <img src="screenshots/Current.png" width="45%" />
+  <img src="screenshots/Highlights.png" width="45%" />
+</p>
+<p align="center">
+  <img src="screenshots/AQI.png" width="45%" />
+  <img src="screenshots/Forecast.png" width="45%" />
+</p>
+
+---
 
 ## 🛠️ Built With
 
