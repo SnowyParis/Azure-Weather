@@ -1,4 +1,5 @@
 import SevenDayForecast from "../components/SevenDayForecast";
+import WeatherSkeleton from "../components/WeatherSkeleton";
 import CurrentWeather from "../components/CurrentWeather";
 import { useAirQuality } from "../hooks/useAirQuality";
 import { useWeather } from "../hooks/useWeather.js";
@@ -80,6 +81,8 @@ function Home() {
               Try again
             </button>
           </div>
+        ) : loading ? (
+          <WeatherSkeleton />
         ) : (
           <div className="flex flex-col gap-9">
             {currentWeather && airQuality && !loading && (
