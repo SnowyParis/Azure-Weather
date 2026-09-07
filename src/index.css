@@ -125,49 +125,6 @@
 }
 
 /* Shimmer used by skeleton loaders */
-@utility shimmer {
-  position: relative;
-  overflow: hidden;
-  &::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    transform: translateX(-100%);
-    background-image: linear-gradient(
-      90deg,
-      transparent,
-      oklch(1 0 0 / 22%),
-      transparent
-    );
-    animation: shimmer-sweep 1.8s infinite;
-  }
-}
-
-@keyframes shimmer-sweep {
-  100% {
-    transform: translateX(100%);
-  }
-}
-
-/* Hide scrollbar for horizontal carousels while keeping scroll */
-@utility no-scrollbar {
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  &::-webkit-scrollbar {
-    display: none;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.001ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.001ms !important;
-  }
-}
-
 @keyframes shimmer {
   100% {
     transform: translateX(100%);
