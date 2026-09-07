@@ -55,7 +55,7 @@ function CurrentWeather({ weather, aqi }) {
 
       <div className="mt-10 flex flex-col items-start gap-5 md:ml-11 md:flex-row md:items-center md:gap-14">
         {TimeGreeting(new Date(weather.dt * 1000).toLocaleTimeString("en-GB")) === "evening" ?
-          <WeatherIcon type={Moon} size={150} /> :
+          <WeatherIcon type={"Moon"} size={150} /> :
           <WeatherIcon type={weather.weather[0].main} size={150} />}
 
         <div className="pl-10">
