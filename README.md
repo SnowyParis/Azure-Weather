@@ -14,6 +14,7 @@ The application was designed with a clean, modern dashboard interface that makes
 * 💨 **Wind Information** — View wind speed, direction, and gusts.
 * 💧 **Humidity** — Monitor atmospheric moisture levels.
 * 📱 **Responsive Design** — Optimized for desktop, tablet, and mobile devices.
+* ⏳ **Loading States** — Skeleton/shimmer loading states provide visual feedback while weather data is being retrieved.
 * ⚠️ **Error Handling** — Displays useful error messages when a location cannot be found or an API request fails.
 * 🧭 **Client-Side Routing** — Uses React Router for navigation between application views.
 
@@ -24,8 +25,9 @@ The application was designed with a clean, modern dashboard interface that makes
   <img src="screenshots/Highlights.png" width="45%" />
 </p>
 <p align="center">
-  <img src="screenshots/AQI.png" width="45%" />
-  <img src="screenshots/Forecast.png" width="45%" />
+  <img src="screenshots/AQI.png" width="30%" />
+  <img src="screenshots/Forecast.png" width="30%" />
+  <img src="screenshots/Skeleton.png" width="30%" />
 </p>
 
 ---
